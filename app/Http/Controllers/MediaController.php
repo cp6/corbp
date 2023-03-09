@@ -111,7 +111,6 @@ class MediaController extends Controller
                     //Get exif information
                     //This has to be done before the file is saved to the disk
                     $exif_data = Image::make($file)->exif();
-                    dd($exif_data);
                     Storage::disk('private')->put("exif/{$directory['name']}/{$media_id}.json", json_encode($exif_data));
                     //dd($exif_data);
                     $height = $exif_data['COMPUTED']['Height'] ?? null;
