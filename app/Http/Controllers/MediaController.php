@@ -125,8 +125,10 @@ class MediaController extends Controller
                     $exif->flash = $exif_data['Flash'] ?? null;
                     $exif->shutter_speed = str_replace("1/", "", $exif_data['ExposureTime'] ?? "");
                     $exif->shutter_speed_raw = $exif_data['ExposureTime'] ?? null;
-                    $fl_exp = explode("/", $exif_data['FocalLength'] ?? "/");
-                    $exif->focal_length = ($fl_exp[0] / $fl_exp[1]);
+                    if (isset($exif_data['FocalLength'])){
+                        $fl_exp = explode("/", $exif_data['FocalLength']);
+                        $exif->focal_length = ($fl_exp[0] / $fl_exp[1]);
+                    }
                     $exif->software = $exif_data['Software'] ?? null;
 
                     if (isset($exif_data['Model'])) {
