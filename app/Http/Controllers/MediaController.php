@@ -119,13 +119,13 @@ class MediaController extends Controller
                     $exif = new Exif();
                     $exif->media_id = $media_id;
                     $exif->iso = $exif_data['ISOSpeedRatings'] ?? null;
-                    $exif->f_stop = str_replace("f/", "", $exif_data['COMPUTED']['ApertureFNumber']);
+                    $exif->f_stop = (isset($exif_data['COMPUTED']['ApertureFNumber'])) ? str_replace("f/", "", $exif_data['COMPUTED']['ApertureFNumber']) : null;
                     $exif->f_stop_raw = $exif_data['COMPUTED']['ApertureFNumber'] ?? null;
                     $exif->exposure = $exif_data['ExposureBiasValue'] ?? null;
                     $exif->flash = $exif_data['Flash'] ?? null;
-                    $exif->shutter_speed = str_replace("1/", "", $exif_data['ExposureTime']);
+                    $exif->shutter_speed = str_replace("1/", "", $exif_data['ExposureTime'] ?? "");
                     $exif->shutter_speed_raw = $exif_data['ExposureTime'] ?? null;
-                    $fl_exp = explode("/", $exif_data['FocalLength']);
+                    $fl_exp = explode("/", $exif_data['FocalLength'] ?? "/");
                     $exif->focal_length = ($fl_exp[0] / $fl_exp[1]);
                     $exif->software = $exif_data['Software'] ?? null;
 
