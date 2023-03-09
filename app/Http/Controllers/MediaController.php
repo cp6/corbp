@@ -111,7 +111,6 @@ class MediaController extends Controller
                     //Get exif information
                     //This has to be done before the file is saved to the disk
                     $exif_data = Image::make($file)->exif();
-                    dd($exif_data);
                     Storage::disk('private')->put("exif/{$directory['name']}/{$media_id}.json", json_encode($exif_data));
                     //dd($exif_data);
                     $height = $exif_data['COMPUTED']['Height'] ?? null;
@@ -140,8 +139,10 @@ class MediaController extends Controller
                         $exif->lens_id = Lense::updateOrCreate(['name' => $exif_data['UndefinedTag:0xA434'], 'slug' => $exif_data['UndefinedTag:0xA434']])->value('id');
                     }
 
-                    $date_exp = explode(" ", $exif_data['DateTimeOriginal']);
-                    $exif->captured_at = str_replace(":", "-", $date_exp[0]) . " " . $date_exp[1];
+                    if (isset($exif_data['DateTimeOriginal'])){
+                        $date_exp = explode(" ", $exif_data['DateTimeOriginal']);
+                        $exif->captured_at = str_replace(":", "-", $date_exp[0]) . " " . $date_exp[1];
+                    }
 
                 } else {//Video
                     if (!in_array($extension, ['mp4', 'mkv', 'mov', 'flv'], true)) {
