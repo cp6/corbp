@@ -10,7 +10,7 @@ class Location extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['slug', 'name', 'area', 'state', 'state_short', 'country', 'country_code', 'postcode', 'lat', 'lon', 'media_count'];
+    protected $fillable = ['slug', 'dir', 'name', 'area', 'state', 'state_short', 'country', 'country_code', 'postcode', 'lat', 'lon', 'media_count'];
 
     public static function getGeoApiData(string $location)
     {

@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class LocationController extends Controller
 {
-    public function index(): \Inertia\Response
+    public function index(Request $request): \Inertia\Response
     {
         return Inertia::render('Location/Index', [
             'locations' => Location::get()
@@ -36,10 +37,11 @@ class LocationController extends Controller
         try {
 
             $location = new Location();
+            $location->dir = Str::random(8);
             $location->name = $request->name;
             $location->slug = strtolower(trim(str_replace(" ", "-", preg_replace("/[^a-zA-Z ]+/", "", $request->name))));
             $location->area = $request->area ?? null;
-            $location->state = $request->country ?? null;
+            $location->state = $request->state ?? null;
             $location->country = $request->country ?? null;
             $location->country_code = $request->country_code ?? null;
             $location->postcode = $request->postcode ?? null;
@@ -88,10 +90,10 @@ class LocationController extends Controller
         $response = $location->update($request->all());
 
         if ($response) {
-            return redirect(route('locations.show', $location))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
+            return redirect(route('locations.edit', $location))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
         }
 
-        return redirect(route('locations.show', $location))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
+        return redirect(route('locations.edit', $location))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
     }
 
     public function destroy(Location $location)

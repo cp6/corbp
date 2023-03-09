@@ -12,14 +12,14 @@ export default function MainLayout({auth, title, header, children}) {
                 {header && (
                     <header className="bg-gray-200 dark:bg-slate-900">
                         <div className="max-w-7xl mx-auto py-4 sm:py-8 px-2"><h1
-                            className="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">{header}</h1>
+                            className="font-semibold text-xl md:text-2xl text-gray-800 dark:text-gray-100 leading-tight">{header}</h1>
                         </div>
                     </header>
                 )}
 
                 <main>
                     <div className="py-4">
-                        <div className="max-w-7xl mx-auto px-1 sm:px-4 lg:px-2 space-y-4">
+                        <div className="max-w-7xl mx-auto px-1 sm:px-2 space-y-4">
                             {children}
                         </div>
                     </div>

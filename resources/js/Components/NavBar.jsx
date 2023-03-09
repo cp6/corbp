@@ -6,9 +6,6 @@ import Dropdown from "@/Components/Dropdown";
 export default function NavBar({auth, type = 'submit', className = '', processing, children, onClick}) {
 
     const user = auth;
-    if (user.user === null){
-        console.log('is NULL');
-    }
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     function processThemeChange(themeToggleDarkIcon, themeToggleLightIcon) {
         themeToggleDarkIcon.classList.toggle('hidden');
@@ -51,16 +48,22 @@ export default function NavBar({auth, type = 'submit', className = '', processin
     }
 
     return (
-        <nav className="bg-slate-100 dark:bg-slate-800 border-b border-gray-300 dark:border-slate-800">
+        <nav className="bg-gray-100 dark:bg-slate-800 border-b border-gray-300 dark:border-slate-800">
             <div className="max-w-7xl mx-auto px-1 sm:px-2">
                 <div className="flex justify-between h-16">
                     <div className="flex">
                         <div className="hidden space-x-8 sm:-my-px sm:flex">
                             <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                corbp
+                                Home
                             </NavLink>
                             <NavLink href={route('locations.index')} active={route().current('locations.*')}>
                                 Locations
+                            </NavLink>
+                            <NavLink href={route('device.index')} active={route().current('device.*')}>
+                                Devices
+                            </NavLink>
+                            <NavLink href={route('lense.index')} active={route().current('lense.*')}>
+                                Lenses
                             </NavLink>
                             {
                                 (() => {

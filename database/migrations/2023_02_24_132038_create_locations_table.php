@@ -9,6 +9,7 @@ return new class extends Migration {
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
+            $table->char('dir', 8)->unique();
             $table->string('slug')->unique();
             $table->string('name')->unique();
             $table->string('area')->nullable()->default(null);
@@ -19,7 +20,7 @@ return new class extends Migration {
             $table->integer('postcode')->nullable()->default(null);
             $table->decimal('lat', 10, 7)->nullable()->default(null);
             $table->decimal('lon', 10, 7)->nullable()->default(null);
-            $table->integer('media_count')->nullable()->default(null);
+            $table->integer('media_count')->default(0);
             $table->timestamps();
         });
     }
