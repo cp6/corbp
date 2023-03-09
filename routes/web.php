@@ -75,8 +75,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/test', function () {
-    //return \App\Models\Directory::generateDirectories();
-    return \App\Models\Directory::randomDirectory();
+    return \App\Models\Directory::generateDirectories();
+    //return \App\Models\Directory::randomDirectory();
    // return \App\Models\Location::getGeoApiData('lake eppalock, victoria, australia');
 });
 
