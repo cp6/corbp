@@ -67,6 +67,7 @@ class MediaController extends Controller
 
     public function uploadHandler(Request $request)
     {
+        dd($request);
         $request->validate([
             'files' => 'required',
             'location_id' => 'integer|nullable|sometimes:',
