@@ -54,11 +54,18 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                             <NavLink href={route('lense.index')} active={route().current('lense.*')}>
                                 Lenses
                             </NavLink>
+                            <NavLink href={route('random')}>
+                                Random image
+                            </NavLink>
+                            <NavLink href={route('stats')}>
+                                Stats
+                            </NavLink>
                             <NavLink>
                                 <button id="theme-toggle" onClick={switchTheme} type="button"
                                         className="text-gray-500 dark:text-gray-400 rounded-md text-sm p-2.5 themeToggle">
                                     <svg id="theme-toggle-dark-icon"
-                                         className={(isDarkTheme) ? "w-5 h-5 hidden" : "w-5 h-5 text-gray-600 hover:text-gray-900"} fill="currentColor"
+                                         className={(isDarkTheme) ? "w-5 h-5 hidden" : "w-5 h-5 text-gray-600 hover:text-gray-900"}
+                                         fill="currentColor"
                                          viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -77,7 +84,8 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                                 (() => {
                                     if (user.user === null) {
                                         return (<>
-                                            <NavLink href={route('login')} active={route().current('login')} className={'dark:text-blue-400'}>
+                                            <NavLink href={route('login')} active={route().current('login')}
+                                                     className={'dark:text-blue-400'}>
                                                 Login
                                             </NavLink>
                                         </>);
@@ -178,13 +186,15 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                                     </div>
                                     <button id="theme-toggle-mobile" onClick={switchTheme} type="button"
                                             className="text-gray-500 dark:text-gray-400 rounded-md text-sm p-2.5 themeToggle">
-                                        <svg id="theme-toggle-dark-icon" className={(isDarkTheme) ? "w-5 h-5 hidden" : "w-5 h-5 text-gray-600 hover:text-gray-900"}
+                                        <svg id="theme-toggle-dark-icon"
+                                             className={(isDarkTheme) ? "w-5 h-5 hidden" : "w-5 h-5 text-gray-600 hover:text-gray-900"}
                                              fill="currentColor"
                                              viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                                         </svg>
-                                        <svg id="theme-toggle-light-icon" className={(isDarkTheme) ? "w-5 h-5 text-gray-200 hover:text-gray-100" : "w-5 h-5 hidden"}
+                                        <svg id="theme-toggle-light-icon"
+                                             className={(isDarkTheme) ? "w-5 h-5 text-gray-200 hover:text-gray-100" : "w-5 h-5 hidden"}
                                              fill="currentColor"
                                              viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path

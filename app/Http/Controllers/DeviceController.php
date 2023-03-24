@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Device;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class DeviceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
-        //
+        return Inertia::render('Devices/Index', [
+            'devices' => []
+        ]);
     }
 
     /**
