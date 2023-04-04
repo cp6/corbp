@@ -57,9 +57,20 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                             <NavLink href={route('random')}>
                                 Random image
                             </NavLink>
-                            <NavLink href={route('stats')}>
+                            <NavLink href={route('stats')} active={route().current('stats')}>
                                 Stats
                             </NavLink>
+                            {
+                                (() => {
+                                    if (user.user !== null) {
+                                        return (<>
+                                            <NavLink href={route('upload')} active={route().current('upload')}>
+                                                Upload
+                                            </NavLink>
+                                        </>);
+                                    }
+                                })()
+                            }
                             <NavLink>
                                 <button id="theme-toggle" onClick={switchTheme} type="button"
                                         className="text-gray-500 dark:text-gray-400 rounded-md text-sm p-2.5 themeToggle">
