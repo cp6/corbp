@@ -36,7 +36,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/random', [MediaController::class, 'getRandom'])->name('random');
 
-Route::get('/stats', [MediaController::class, 'stats'])->name('stats');
+Route::get('/stats', [MediaController::class, 'statsPage'])->name('stats');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
