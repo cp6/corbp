@@ -61,7 +61,7 @@ class LocationController extends Controller
     public function show(Location $location): \Inertia\Response
     {
         return Inertia::render('Location/Show', [
-            'resource' => $location,
+            'location' => $location,
             'response' => \Session::get('response')
         ]);
     }

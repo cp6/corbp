@@ -125,7 +125,7 @@ class MediaController extends Controller
                     $exif->flash = $exif_data['Flash'] ?? null;
                     $exif->shutter_speed = str_replace("1/", "", $exif_data['ExposureTime'] ?? "");
                     $exif->shutter_speed_raw = $exif_data['ExposureTime'] ?? null;
-                    if (isset($exif_data['FocalLength'])){
+                    if (isset($exif_data['FocalLength'])) {
                         $fl_exp = explode("/", $exif_data['FocalLength']);
                         $exif->focal_length = ($fl_exp[0] / $fl_exp[1]);
                     }
@@ -139,7 +139,7 @@ class MediaController extends Controller
                         $exif->lens_id = Lense::updateOrCreate(['name' => $exif_data['UndefinedTag:0xA434'], 'slug' => $exif_data['UndefinedTag:0xA434']])->value('id');
                     }
 
-                    if (isset($exif_data['DateTimeOriginal'])){
+                    if (isset($exif_data['DateTimeOriginal'])) {
                         $date_exp = explode(" ", $exif_data['DateTimeOriginal']);
                         $exif->captured_at = str_replace(":", "-", $date_exp[0]) . " " . $date_exp[1];
                     }
@@ -220,6 +220,18 @@ class MediaController extends Controller
     {
         $file = json_decode(Storage::disk('private')->get("uploadProgress.json"));
         return response()->json($file)->header('Content-Type', 'application/json');
+    }
+
+    public static function statsPage(): \Inertia\Response
+    {
+        return Inertia::render('Stats', [
+            'stats' => []
+        ]);
+    }
+
+    public static function getRandom(): string
+    {
+        return "Not in use yet but here is a random string " . \Str::random(24);
     }
 
 }

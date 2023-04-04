@@ -8,7 +8,7 @@ export default function Index(props) {
     return (
         <MainLayout auth={auth} title={'Lenses'} header={'Lenses'}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
-                <div className="grid gap-2 grid-cols-2 sm:grid-cols-6 sm:gap-4">
+                <div className="grid gap-2 grid-cols-2 sm:grid-cols-4 sm:gap-4">
                     {props.lenses.data.map(lense =>
                         <a key={lense.id} href={route('lense.show', lense.slug)}>
                             <Card>

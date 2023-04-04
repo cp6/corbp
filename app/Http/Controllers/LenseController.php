@@ -25,9 +25,12 @@ class LenseController extends Controller
         //
     }
 
-    public function show(Lense $lense)
+    public function show(Lense $lense): \Inertia\Response
     {
-        //
+        return Inertia::render('Lenses/Show', [
+            'lense' => $lense,
+            'response' => \Session::get('response')
+        ]);
     }
 
     public function edit(Lense $lense)

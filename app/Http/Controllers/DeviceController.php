@@ -25,9 +25,12 @@ class DeviceController extends Controller
         //
     }
 
-    public function show(Device $device)
+    public function show(Device $device): \Inertia\Response
     {
-        //
+        return Inertia::render('Devices/Show', [
+            'device' => $device,
+            'response' => \Session::get('response')
+        ]);
     }
 
     public function edit(Device $device)
