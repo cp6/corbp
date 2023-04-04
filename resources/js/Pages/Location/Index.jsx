@@ -8,9 +8,10 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import {Transition} from "@headlessui/react";
 import {HiDownload} from "react-icons/hi";
 import NavLink from "@/Components/NavLink";
+import Pagination from "@/Components/Pagination";
 
 export default function Index({auth, response, locations}) {
-
+console.log(locations);
     return (
         <MainLayout auth={auth} title={'Locations'} header={'Locations'}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
@@ -23,7 +24,7 @@ export default function Index({auth, response, locations}) {
                     })()
                 }
                 <div className="grid gap-2 grid-cols-2 sm:grid-cols-6 sm:gap-4">
-                    {locations.map(location =>
+                    {locations.data.map(location =>
                         <a key={location.id} href={route('locations.show', location.slug)}>
                             <Card>
                                 <h1 className={'font-semibold text-gray-800 dark:text-white'}>{location.name} <span
@@ -33,6 +34,9 @@ export default function Index({auth, response, locations}) {
                             </Card>
                         </a>
                     )}
+                </div>
+                <div className="grid grid-cols-2">
+                    <Pagination data={locations}/>
                 </div>
             </div>
         </MainLayout>
