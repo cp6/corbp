@@ -8,61 +8,46 @@ use Inertia\Inertia;
 
 class DeviceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): \Inertia\Response
     {
         return Inertia::render('Devices/Index', [
-            'devices' => []
+            'devices' => Device::Paginate(2)
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Device $device)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Device $device)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Device $device)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Device $device)
     {
-        //
+        try {
+            $device->delete();
+        } catch (\Exception $exception) {
+            return redirect(route('device.show', $device))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
+        }
+
+        return redirect(route('device.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
     }
 }
