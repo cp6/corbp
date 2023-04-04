@@ -11,7 +11,6 @@ class LocationController extends Controller
 {
     public function index(Request $request): \Inertia\Response
     {
-        //dd(Location::Paginate(2)->items());
         return Inertia::render('Location/Index', [
             'locations' => Location::Paginate(2)
         ]);
