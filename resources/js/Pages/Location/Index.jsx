@@ -1,22 +1,21 @@
 import MainLayout from "@/Layouts/MainLayout";
 import Card from "@/Components/Card";
 import Pagination from "@/Components/Pagination";
+import CreateButton from "@/Components/CreateButton";
 
-export default function Index({auth, response, locations}) {
-console.log(locations);
+export default function Index(props) {
     return (
-        <MainLayout auth={auth} title={'Locations'} header={'Locations'}>
+        <MainLayout auth={props.auth} title={'Locations'} header={'Locations'}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 {
                     (() => {
-                        if (auth.user !== null) {
-                            return (<a href={route('locations.create')} className={'text-blue-500 text-sm'}>Create
-                                location</a>);
+                        if (props.auth.user !== null) {
+                            return (<CreateButton text={'Add a location'} link={route('locations.create')}/>);
                         }
                     })()
                 }
-                <div className="grid gap-2 grid-cols-2 sm:grid-cols-6 sm:gap-4">
-                    {locations.data.map(location =>
+                <div className="grid gap-2 grid-cols-2 sm:grid-cols-4 sm:gap-4">
+                    {props.locations.data.map(location =>
                         <a key={location.id} href={route('locations.show', location.slug)}>
                             <Card>
                                 <h1 className={'font-semibold text-gray-800 dark:text-white'}>{location.name} <span
@@ -28,7 +27,7 @@ console.log(locations);
                     )}
                 </div>
                 <div className="grid grid-cols-2">
-                    <Pagination data={locations}/>
+                    <Pagination data={props.locations}/>
                 </div>
             </div>
         </MainLayout>
