@@ -42,7 +42,7 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                 <div className="flex justify-between h-16">
                     <div className="flex">
                         <div className="hidden space-x-8 sm:-my-px sm:flex">
-                            <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                            <NavLink href={route('home')} active={route().current('home')}>
                                 Home
                             </NavLink>
                             <NavLink href={route('locations.index')} active={route().current('locations.*')}>
@@ -179,8 +179,8 @@ export default function NavBar({auth, type = 'submit', className = '', processin
 
             <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                 <div className="pt-2 pb-3 space-y-1">
-                    <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                        YABSdb
+                    <ResponsiveNavLink href={route('home')} active={route().current('home')}>
+                        Home
                     </ResponsiveNavLink>
                 </div>
                 {
