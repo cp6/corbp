@@ -6,7 +6,7 @@ export default function Dashboard() {
     const auth = usePage().props.auth;
 
     return (
-        <MainLayout auth={auth} title={'Dashboard'} header={'Dashboard'}>
+        <MainLayout auth={auth} title={'Home'} header={'corbp'}>
 
         </MainLayout>
     );
