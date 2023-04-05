@@ -54,6 +54,9 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                             <NavLink href={route('lense.index')} active={route().current('lense.*')}>
                                 Lenses
                             </NavLink>
+                            <NavLink href={route('tag.index')} active={route().current('tag.*')}>
+                                Tags
+                            </NavLink>
                             <NavLink href={route('random')}>
                                 Random image
                             </NavLink>

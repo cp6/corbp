@@ -6,6 +6,7 @@ use App\Http\Controllers\LenseController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -46,6 +47,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/lenses/{lense:slug}/edit', [LenseController::class, 'edit'])->name('lense.edit');
     Route::patch('/lenses/{lense}', [LenseController::class, 'update'])->name('lense.update');
     Route::delete('/lenses/{lense}', [LenseController::class, 'destroy'])->name('lense.destroy');
+
+    //Tags
+    Route::get('/tags', [TagController::class, 'index'])->name('tag.index');
+    Route::get('/tags/create', [TagController::class, 'create'])->name('tag.create');
+    Route::get('/tags/{tag:slug}', [TagController::class, 'show'])->name('tag.show');
+    Route::post('/tags', [TagController::class, 'store'])->name('tag.store');
+    Route::get('/tags/{tag:slug}/edit', [TagController::class, 'edit'])->name('tags.edit');
+    Route::patch('/tags/{tag}', [TagController::class, 'update'])->name('tag.update');
+    Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tag.destroy');
 
     Route::get('/upload', [MediaController::class, 'upload'])->name('upload');
     Route::get('/upload/progress', [MediaController::class, 'uploadFileProgress'])->name('upload.progress');
