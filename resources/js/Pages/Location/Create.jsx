@@ -1,6 +1,6 @@
 import MainLayout from "@/Layouts/MainLayout";
 import Card from "@/Components/Card";
-import {useForm} from "@inertiajs/react";
+import {useForm, usePage} from "@inertiajs/react";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
@@ -8,7 +8,9 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import {Transition} from "@headlessui/react";
 import {HiDownload} from "react-icons/hi";
 
-export default function Create({auth, response}) {
+export default function Create(props) {
+    const auth = usePage().props.auth;
+    const response = props.response;
 
     const {data, setData, post, errors, processing, recentlySuccessful} = useForm({
         name: '',

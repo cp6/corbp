@@ -1,6 +1,6 @@
 import MainLayout from "@/Layouts/MainLayout";
 import Card from "@/Components/Card";
-import {useForm} from "@inertiajs/react";
+import {useForm, usePage} from "@inertiajs/react";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
@@ -9,7 +9,10 @@ import {Transition} from "@headlessui/react";
 import {HiDownload} from "react-icons/hi";
 import ResponseText from "@/Components/ResponseText";
 
-export default function Edit({auth, resource, response}) {
+export default function Edit(props) {
+    const auth = usePage().props.auth;
+    const response = props.response;
+    const resource = props.resource;
 
     const {data, setData, patch, errors, processing, recentlySuccessful} = useForm({
         name: resource.name,
