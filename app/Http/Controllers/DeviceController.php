@@ -29,7 +29,7 @@ class DeviceController extends Controller
     {
         return Inertia::render('Devices/Show', [
             'device' => $device,
-            'response' => \Session::get('response')
+            'response' => \Session::get('response'),
         ]);
     }
 
