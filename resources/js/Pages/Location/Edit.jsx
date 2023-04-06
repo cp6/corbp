@@ -51,7 +51,7 @@ export default function Edit({auth, resource, response}) {
     };
 
     return (
-        <MainLayout auth={auth} title={'Edit location ' + resource.id} header={'Edit location: ' + resource.name}>
+        <MainLayout auth={auth} title={'Edit location ' + resource.name} header={'Edit location: ' + resource.name}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
