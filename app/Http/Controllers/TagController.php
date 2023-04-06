@@ -11,7 +11,7 @@ class TagController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render('Tags/Index', [
-            'tags' => []
+            'tags' => Tag::get()
         ]);
     }
 
