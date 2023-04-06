@@ -33,14 +33,31 @@ class DeviceController extends Controller
         ]);
     }
 
-    public function edit(Device $device)
+    public function edit(Device $device): \Inertia\Response
     {
-        //
+        return Inertia::render('Devices/Edit', [
+            'resource' => $device,
+            'response' => \Session::get('response')
+        ]);
     }
 
     public function update(Request $request, Device $device)
     {
-        //
+        $request->validate([
+            'name' => 'string|required|max:125',
+            'slug' => 'string|required|max:64',
+            'short_name' => 'string|required|max:64',
+            'brand' => 'string|sometimes|nullable|max:125',
+            'model' => 'string|sometimes|nullable|max:125'
+        ]);
+
+        $response = $device->update($request->all());
+
+        if ($response) {
+            return redirect(route('device.edit', $device))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
+        }
+
+        return redirect(route('device.edit', $device))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
     }
 
     public function destroy(Device $device)
