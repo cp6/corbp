@@ -42,6 +42,12 @@ class TagController extends Controller
 
     public function destroy(Tag $tag)
     {
-        //
+        try {
+            $tag->delete();
+        } catch (\Exception $exception) {
+            return redirect(route('tag.show', $tag))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
+        }
+
+        return redirect(route('tag.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
     }
 }

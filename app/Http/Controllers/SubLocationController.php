@@ -39,6 +39,12 @@ class SubLocationController extends Controller
 
     public function destroy(SubLocation $subLocation)
     {
-        //
+        try {
+            $subLocation->delete();
+        } catch (\Exception $exception) {
+            return redirect(route('sublocation.show', $subLocation))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
+        }
+
+        return redirect(route('sublocation.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
     }
 }
