@@ -19,9 +19,11 @@ use Intervention\Image\Facades\Image;
 
 class MediaController extends Controller
 {
-    public function index()
+    public function index(): \Inertia\Response
     {
-        //
+        return Inertia::render('Media/Index', [
+
+        ]);
     }
 
     public function create()
@@ -34,9 +36,11 @@ class MediaController extends Controller
         //
     }
 
-    public function show(Media $media)
+    public function show(Media $media): \Inertia\Response
     {
-        //
+        return Inertia::render('Media/Show', [
+
+        ]);
     }
 
     public function edit(Media $media)
@@ -51,7 +55,13 @@ class MediaController extends Controller
 
     public function destroy(Media $media)
     {
-        //
+        try {
+            $media->delete();
+        } catch (\Exception $exception) {
+            return redirect(route('media.show', $media))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
+        }
+
+        return redirect(route('media.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
     }
 
     public function upload(): \Inertia\Response

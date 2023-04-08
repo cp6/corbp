@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\SubLocation;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SubLocationController extends Controller
 {
-    public function index()
+    public function index(): \Inertia\Response
     {
-        //
+        return Inertia::render('SubLocation/Index', [
+
+        ]);
     }
 
     public function create()
@@ -22,9 +25,11 @@ class SubLocationController extends Controller
         //
     }
 
-    public function show(SubLocation $subLocation)
+    public function show(SubLocation $subLocation): \Inertia\Response
     {
-        //
+        return Inertia::render('SubLocation/Show', [
+
+        ]);
     }
 
     public function edit(SubLocation $subLocation)
