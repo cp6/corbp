@@ -15,9 +15,11 @@ class SubLocationController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): \Inertia\Response
     {
-        //
+        return Inertia::render('SubLocation/Create', [
+
+        ]);
     }
 
     public function store(Request $request)
@@ -32,9 +34,11 @@ class SubLocationController extends Controller
         ]);
     }
 
-    public function edit(SubLocation $subLocation)
+    public function edit(SubLocation $subLocation): \Inertia\Response
     {
-        //
+        return Inertia::render('SubLocation/Edit', [
+
+        ]);
     }
 
     public function update(Request $request, SubLocation $subLocation)

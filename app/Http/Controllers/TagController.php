@@ -15,9 +15,11 @@ class TagController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): \Inertia\Response
     {
-        //
+        return Inertia::render('Tag/Create', [
+
+        ]);
     }
 
     public function store(Request $request)
@@ -25,14 +27,18 @@ class TagController extends Controller
         //
     }
 
-    public function show(Tag $tag)
+    public function show(Tag $tag): \Inertia\Response
     {
-        //
+        return Inertia::render('Tag/Show', [
+            'resource' => $tag
+        ]);
     }
 
-    public function edit(Tag $tag)
+    public function edit(Tag $tag): \Inertia\Response
     {
-        //
+        return Inertia::render('Tag/Edit', [
+
+        ]);
     }
 
     public function update(Request $request, Tag $tag)

@@ -43,9 +43,11 @@ class MediaController extends Controller
         ]);
     }
 
-    public function edit(Media $media)
+    public function edit(Media $media): \Inertia\Response
     {
-        //
+        return Inertia::render('Media/Edit', [
+
+        ]);
     }
 
     public function update(Request $request, Media $media)
