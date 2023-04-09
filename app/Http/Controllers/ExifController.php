@@ -23,9 +23,11 @@ class ExifController extends Controller
         //
     }
 
-    public function show(Exif $exif)
+    public function show(Exif $exif): \Inertia\Response
     {
-        //
+        return Inertia::render('Exif/Show', [
+
+        ]);
     }
 
     public function edit(Exif $exif): \Inertia\Response
