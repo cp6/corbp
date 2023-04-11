@@ -11,7 +11,7 @@ class SubLocationController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render('SubLocation/Index', [
-
+            'sub_locations' => SubLocation::Paginate(2)
         ]);
     }
 
@@ -30,20 +30,29 @@ class SubLocationController extends Controller
     public function show(SubLocation $subLocation): \Inertia\Response
     {
         return Inertia::render('SubLocation/Show', [
-
+            'sub_locations' => $subLocation,
+            'response' => \Session::get('response')
         ]);
     }
 
     public function edit(SubLocation $subLocation): \Inertia\Response
     {
         return Inertia::render('SubLocation/Edit', [
-
+            'resource' => $subLocation,
+            'response' => \Session::get('response')
         ]);
     }
 
     public function update(Request $request, SubLocation $subLocation)
     {
-        //
+        $request->validate([
+            'name' => 'string|required|max:125',
+            'slug' => 'string|required|max:64',
+            'lat' => 'numeric|sometimes|nullable',
+            'lon' => 'numeric|sometimes|nullable',
+        ]);
+
+
     }
 
     public function destroy(SubLocation $subLocation)
