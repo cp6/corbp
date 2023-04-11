@@ -76,7 +76,7 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                             }
                             <NavLink>
                                 <button id="theme-toggle" onClick={switchTheme} type="button"
-                                        className="text-gray-500 dark:text-gray-400 rounded-md text-sm p-2.5 themeToggle">
+                                        className="text-gray-500 dark:text-gray-400 rounded-md text-sm p-2.5 themeToggle" title={(isDarkTheme) ? "Make it light" : "Make it dark"}>
                                     <svg id="theme-toggle-dark-icon"
                                          className={(isDarkTheme) ? "w-5 h-5 hidden" : "w-5 h-5 text-gray-600 hover:text-gray-900"}
                                          fill="currentColor"
@@ -184,6 +184,24 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                 <div className="pt-2 pb-3 space-y-1">
                     <ResponsiveNavLink href={route('home')} active={route().current('home')}>
                         Home
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('locations.index')} active={route().current('locations.*')}>
+                        Locations
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('device.index')} active={route().current('device.*')}>
+                        Devices
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('lense.index')} active={route().current('lense.*')}>
+                        Lenses
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('tag.index')} active={route().current('tag.*')}>
+                        Tags
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('random')}>
+                        Random image
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('stats')} active={route().current('stats')}>
+                        Stats
                     </ResponsiveNavLink>
                 </div>
                 {
