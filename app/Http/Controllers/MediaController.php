@@ -26,14 +26,15 @@ class MediaController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): \Inertia\Response
     {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
+        return Inertia::render('Upload', [
+            'locations' => Location::get(),
+            'sub_locations' => SubLocation::get(),
+            'upload_size' => ini_get('upload_max_filesize'),
+            'files_upload' => ini_get('max_file_uploads'),
+            'response' => \Session::get('response')
+        ]);
     }
 
     public function show(Media $media): \Inertia\Response
@@ -66,18 +67,7 @@ class MediaController extends Controller
         return redirect(route('media.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
     }
 
-    public function upload(): \Inertia\Response
-    {
-        return Inertia::render('Upload', [
-            'locations' => Location::get(),
-            'sub_locations' => SubLocation::get(),
-            'upload_size' => ini_get('upload_max_filesize'),
-            'files_upload' => ini_get('max_file_uploads'),
-            'response' => \Session::get('response')
-        ]);
-    }
-
-    public function uploadHandler(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'files' => 'required',

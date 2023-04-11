@@ -64,9 +64,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tag.destroy');
 
     //Upload
-    Route::get('/upload', [MediaController::class, 'upload'])->name('upload');
+    Route::get('/upload', [MediaController::class, 'create'])->name('upload');
     Route::get('/upload/progress', [MediaController::class, 'uploadFileProgress'])->name('upload.progress');
-    Route::post('/upload', [MediaController::class, 'uploadHandler'])->name('upload.handle');
+    Route::post('/upload', [MediaController::class, 'store'])->name('upload.handle');
 
 });
 
