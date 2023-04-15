@@ -71,8 +71,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/test', function () {
-    //return \App\Models\Directory::generateDirectories();
-    return \App\Models\Directory::randomDirectory();
+    abort(404);
 });
 
 require __DIR__ . '/auth.php';
