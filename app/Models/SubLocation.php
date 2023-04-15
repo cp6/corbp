@@ -11,5 +11,9 @@ class SubLocation extends Model
 
     protected $fillable = ['location_id', 'slug', 'name', 'media_count', 'lat', 'lon'];
 
+    public function location(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Location::class, 'id', 'location_id');
+    }
 
 }

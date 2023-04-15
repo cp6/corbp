@@ -13,13 +13,29 @@ class Media extends Model
     public $incrementing = false;
 
     protected $keyType = 'string';
+
     protected $fillable = ['parent_id', 'slug', 'group_upload_sequence', 'directory_id', 'location_id', 'sub_location_id', 'processed', 'display', 'is_parent', 'is_thumbnail', 'type', 'original_filename', 'extension', 'width', 'height', 'size', 'bitrate', 'duration', 'framerate', 'codec', 'has_audio', 'has_watermark'];
 
-    protected static function booted(): void
+    protected $with = ['parent', 'location', 'sub_location', 'thumbnail'];
+
+    public function parent(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        /*static::creating(function (Media $media) {
-            $media->id = \Str::random(8);
-        });*/
+        return $this->hasOne(__CLASS__, 'id', 'parent_id');
+    }
+
+    public function thumbnail(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(__CLASS__, 'id', 'id')->where('is_thumbnail', true);
+    }
+
+    public function location(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Location::class, 'id', 'location_id');
+    }
+
+    public function sub_location(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(SubLocation::class, 'id', 'sub_location_id');
     }
 
     public static function createSmallerImage($image, string $save_as, int $width = 180, int $height = 140): \Intervention\Image\Image
