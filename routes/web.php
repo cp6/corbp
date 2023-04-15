@@ -28,7 +28,7 @@ Route::get('/lenses/{lense:slug}', [LenseController::class, 'show'])->name('lens
 Route::get('/tags', [TagController::class, 'index'])->name('tag.index');
 Route::get('/tags/{tag:slug}', [TagController::class, 'show'])->name('tag.show');
 
-Route::post('/m/{media}', [MediaController::class, 'show'])->name('media.show');
+Route::get('/m/{media}', [MediaController::class, 'show'])->name('media.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
