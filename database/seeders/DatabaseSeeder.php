@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Directory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -23,5 +24,14 @@ class DatabaseSeeder extends Seeder
              'remember_token' => Str::random(10),
              'api_token' => 'vASuNoCPgjiBxfhookSdiIQVNEu2kAZy0buHpeCUTFkg7bOtXFxT3CWGNvcg5KMC'
          ]);
+
+        $amount = env("UNIQUE_DIRECTORIES", 12);
+
+        for ($i = 1; $i <= $amount; $i++) {
+            $directory = new Directory();
+            $directory->name = \Str::random(8);
+            $directory->save();
+        }
+
     }
 }
