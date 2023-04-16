@@ -39,6 +39,7 @@ class MediaController extends Controller
 
     public function show(Media $media): \Inertia\Response
     {
+        dd($media);
         return Inertia::render('Media/Show', [
 
         ]);
@@ -47,13 +48,24 @@ class MediaController extends Controller
     public function edit(Media $media): \Inertia\Response
     {
         return Inertia::render('Media/Edit', [
-
+            'media' => $media,
+            'response' => \Session::get('response')
         ]);
     }
 
     public function update(Request $request, Media $media)
     {
-        //
+        $request->validate([
+            'slug' => 'string|required|max:64',
+        ]);
+
+        $response = $media->update($request->all());
+
+        if ($response) {
+            return redirect(route('media.edit', $media))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
+        }
+
+        return redirect(route('media.edit', $media))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
     }
 
     public function destroy(Media $media)

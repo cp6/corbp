@@ -35,6 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    //Media
+    Route::get('/m/{media}/edit', [MediaController::class, 'edit'])->name('media.edit');
+    Route::patch('/m/{media}', [MediaController::class, 'update'])->name('media.update');
+
     //Locations
     Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
     Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
