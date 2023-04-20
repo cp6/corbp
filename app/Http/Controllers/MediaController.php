@@ -57,15 +57,31 @@ class MediaController extends Controller
     {
         $request->validate([
             'slug' => 'string|required|max:64',
+            'title' => 'string|sometimes|nullable|max:64',
+            'description' => 'string|sometimes|nullable|max:255',
         ]);
 
-        $response = $media->update($request->all());
+        $media_response = $media->update($request->all());
 
-        if ($response) {
+        $title_desc_response = $media->titleDesc()->update([
+            'title' => $request->title ?? $media->titleDesc->title,
+            'description' => $request->description ?? $media->titleDesc->description
+        ]);
+
+        if ($media_response && $title_desc_response) {
             return redirect(route('media.edit', $media))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
         }
 
+        if (!$media_response && $title_desc_response) {
+            return redirect(route('media.edit', $media))->with(['response' => ['type' => 'failure', 'message' => 'Updating the slug failed']]);
+        }
+
+        if ($media_response && !$title_desc_response) {
+            return redirect(route('media.edit', $media))->with(['response' => ['type' => 'failure', 'message' => 'Updating the title and desc failed']]);
+        }
+
         return redirect(route('media.edit', $media))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
+
     }
 
     public function destroy(Media $media)

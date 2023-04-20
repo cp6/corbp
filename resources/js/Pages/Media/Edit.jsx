@@ -14,7 +14,9 @@ export default function Edit(props) {
     const resource = props.media;
 
     const {data, setData, patch, errors, processing, recentlySuccessful} = useForm({
-        slug: resource.slug || ''
+        slug: resource.slug || '',
+        title: resource.title_desc.title || '',
+        description: resource.title_desc.description || '',
     });
 
     const submit = (e) => {
@@ -36,6 +38,22 @@ export default function Edit(props) {
                                     required={true}
                                 />
                                 <InputError message={errors.slug}/>
+                            </div>
+                            <div className={'col-span-1 md:col-span-4'}>
+                                <InputLabel htmlFor="title" value="Title"/>
+                                <TextInput
+                                    value={data.title}
+                                    onChange={(e) => setData('title', e.target.value)}
+                                />
+                                <InputError message={errors.title}/>
+                            </div>
+                            <div className={'col-span-1 md:col-span-6'}>
+                                <InputLabel htmlFor="description" value="Description"/>
+                                <TextInput
+                                    value={data.description}
+                                    onChange={(e) => setData('description', e.target.value)}
+                                />
+                                <InputError message={errors.description}/>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
