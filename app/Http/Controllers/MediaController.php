@@ -41,7 +41,8 @@ class MediaController extends Controller
     {
         dd($media);
         return Inertia::render('Media/Show', [
-
+            'media' => $media,
+            'response' => \Session::get('response')
         ]);
     }
 
