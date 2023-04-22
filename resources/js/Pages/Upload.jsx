@@ -72,7 +72,7 @@ export default function Upload() {
                     <form onSubmit={submit} className="mt-6 space-y-6">
                         <div className={'grid grid-cols-1 md:grid-cols-6 md:gap-4 mb-2'}>
                             <div className={'col-span-6 md:col-span-3'}>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Media
+                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image
                                     files</label>
                                 <input
                                     type="file"
