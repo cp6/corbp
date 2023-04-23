@@ -9,7 +9,6 @@ use App\Models\Exif;
 use App\Models\Lense;
 use App\Models\Location;
 use App\Models\Media;
-use App\Models\MediaTitleDesc;
 use App\Models\SubLocation;
 use App\Models\TitleDescription;
 use Illuminate\Http\Request;
