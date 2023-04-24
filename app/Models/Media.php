@@ -14,7 +14,7 @@ class Media extends Model
 
     protected $keyType = 'string';
 
-    protected $fillable = ['parent_id', 'slug', 'group_upload_sequence', 'directory_id', 'location_id', 'sub_location_id', 'processed', 'display', 'is_parent', 'is_thumbnail', 'type', 'original_filename', 'extension', 'width', 'height', 'size', 'bitrate', 'duration', 'framerate', 'codec', 'has_audio', 'has_watermark'];
+    protected $fillable = ['parent_id', 'slug', 'group_upload_sequence', 'directory_id', 'location_id', 'sub_location_id', 'processed', 'display', 'is_parent', 'is_thumbnail', 'type', 'original_filename', 'extension', 'width', 'height', 'size', 'has_watermark'];
 
     protected $with = ['parent', 'location', 'sub_location', 'thumbnail', 'titleDesc'];
 

@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->boolean('display')->default(1);
             $table->boolean('is_parent')->default(1);
             $table->boolean('is_thumbnail')->default(0);
-            $table->tinyInteger('type');//1 = image, 2 = video, 3 = who knows
+            $table->tinyInteger('type')->default(1);//1 = image, 2 = video, 3 = who knows
 
             $table->string('original_filename')->nullable()->default(null);//DSC06548.ARW
             $table->char('extension', 3);//jpg, png, arw, img, mp4, mov, flv etc
@@ -27,11 +27,11 @@ return new class extends Migration {
             $table->integer('width')->nullable()->default(null);
             $table->integer('height')->nullable()->default(null);
             $table->integer('size')->nullable()->default(null);//bytes
-            $table->integer('bitrate')->nullable()->default(null);//for video
-            $table->integer('duration')->nullable()->default(null);//for video
-            $table->float('framerate')->nullable()->default(null);//for video
-            $table->string('codec', 32)->nullable()->default(null);//for video. h264 or h265 etc
-            $table->boolean('has_audio')->nullable()->default(null);//for video
+            //$table->integer('bitrate')->nullable()->default(null);//for video
+            //$table->integer('duration')->nullable()->default(null);//for video
+            //$table->float('framerate')->nullable()->default(null);//for video
+            //$table->string('codec', 32)->nullable()->default(null);//for video. h264 or h265 etc
+            //$table->boolean('has_audio')->nullable()->default(null);//for video
             $table->boolean('has_watermark')->nullable()->default(null);//for video
 
             $table->timestamps();
