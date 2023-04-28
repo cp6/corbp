@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('sub_location_id')->nullable()->default(null);
             $table->boolean('processed')->default(0);
             $table->boolean('display')->default(1);
-            $table->boolean('is_parent')->default(1);
-            $table->boolean('is_thumbnail')->default(0);
+            //$table->boolean('is_parent')->default(1);
+            //$table->boolean('is_thumbnail')->default(0);
             $table->tinyInteger('type')->default(1);//1 = image, 2 = video, 3 = who knows
 
             $table->string('original_filename')->nullable()->default(null);//DSC06548.ARW
@@ -32,7 +32,7 @@ return new class extends Migration {
             //$table->float('framerate')->nullable()->default(null);//for video
             //$table->string('codec', 32)->nullable()->default(null);//for video. h264 or h265 etc
             //$table->boolean('has_audio')->nullable()->default(null);//for video
-            $table->boolean('has_watermark')->nullable()->default(null);//for video
+            //$table->boolean('has_watermark')->nullable()->default(null);//for video
 
             $table->timestamps();
             $table->foreign('directory_id')->references('id')->on('directories')->onDelete('set null');
