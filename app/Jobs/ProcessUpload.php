@@ -43,6 +43,8 @@ class ProcessUpload implements ShouldQueue
 
         //Delete the original uploaded file
         Storage::disk('private')->delete("process/{$this->media->id}.{$extension}");
+
+        $this->media->update(['processed' => 1]);
     }
 
 }
