@@ -38,7 +38,6 @@ return new class extends Migration {
             $table->foreign('directory_id')->references('id')->on('directories')->onDelete('set null');
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('set null');
             $table->foreign('sub_location_id')->references('id')->on('sub_locations')->onDelete('set null');
-            $table->foreign('id')->references('id')->on('title_descriptions')->onDelete('cascade');
         });
     }
 

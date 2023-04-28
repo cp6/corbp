@@ -14,5 +14,10 @@ class TitleDescription extends Model
 
     protected $fillable = ['id', 'title', 'description'];
 
+    public function media(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'id', 'id');
+    }
+
 
 }

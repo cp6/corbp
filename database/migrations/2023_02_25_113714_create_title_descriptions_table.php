@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('title',125)->nullable()->default(null);
             $table->string('description',500)->nullable()->default(null);
             $table->timestamps();
+            $table->foreign('id')->references('id')->on('media')->onDelete('cascade');
         });
     }
 
