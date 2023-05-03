@@ -16,7 +16,7 @@ class Media extends Model
 
     protected $fillable = ['parent_id', 'slug', 'group_upload_sequence', 'directory_id', 'location_id', 'sub_location_id', 'processed', 'display', 'is_parent', 'is_thumbnail', 'type', 'original_filename', 'extension', 'width', 'height', 'size', 'has_watermark'];
 
-    protected $with = ['parent', 'location', 'sub_location', 'thumbnail', 'titleDesc'];
+    protected $with = ['parent', 'location', 'sub_location', 'titleDesc'];
 
     public function parent(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
@@ -26,11 +26,6 @@ class Media extends Model
     public function titleDesc(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(TitleDescription::class, 'id', 'id');
-    }
-
-    public function thumbnail(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(__CLASS__, 'id', 'id')->where('is_thumbnail', true);
     }
 
     public function location(): \Illuminate\Database\Eloquent\Relations\HasOne
