@@ -124,12 +124,6 @@ class MediaController extends Controller
 
                 $media_id = \Str::random(8);
 
-                $title_desc = new TitleDescription();
-                $title_desc->id = $media_id;
-                $title_desc->title = null;
-                $title_desc->description = null;
-                $title_desc->save();
-
                 $extension = $file->extension();
                 $size = $file->getSize();
                 $size_tally += $size;
@@ -185,6 +179,12 @@ class MediaController extends Controller
                     $media->directory_id = $directory['id'] ?? null;
                     $media->original_filename = $file->getClientOriginalName();
                     $media->save();
+
+                    $title_desc = new TitleDescription();
+                    $title_desc->id = $media_id;
+                    $title_desc->title = null;
+                    $title_desc->description = null;
+                    $title_desc->save();
 
                     //Save the exif as media now created
                     $exif->save();
