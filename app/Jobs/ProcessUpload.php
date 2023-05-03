@@ -29,8 +29,13 @@ class ProcessUpload implements ShouldQueue
         $file = Storage::disk('private')->get("process/{$this->media->id}.{$this->media->extension}");
 
         //Make smaller version of the full sized uploaded image and save into public uploads
-        $upload_directory = "app/public/uploads/{$this->media->location->dir}/";
+        $directory = $this->media->location->dir ?? 'default';
+        $upload_directory = "app/public/uploads/{$directory}/";
         $extension = $this->media->extension;
+
+        if (!Storage::disk('public')->exists("uploads/{$directory}/")) {
+            Storage::disk('public')->makeDirectory("uploads/{$directory}/");
+        }
 
         Media::createSmallerImage($file, storage_path($upload_directory) . $this->media->id . '_THUMB.' . $extension, (int)(0.03 * $this->media->width), (int)(0.03 * $this->media->height));
         Media::createSmallerImage($file, storage_path($upload_directory) . $this->media->id . '_SMALL.' . $extension, (int)(0.09 * $this->media->width), (int)(0.09 * $this->media->height));
@@ -39,7 +44,7 @@ class ProcessUpload implements ShouldQueue
 
         //Watermark large and medium version images only
         Media::watermarkImage($file, storage_path($upload_directory) . $this->media->id . '.' . $extension, 120, 100, 'corbpie_watermark_large.png');
-        Media::watermarkImage(Storage::disk('public')->get("uploads/{$this->media->location->dir}/{$this->media->id}_MEDIUM.{$extension}"), storage_path($upload_directory) . $this->media->id . '_MEDIUM.' . $extension, 80, 80, 'corbpie_watermark_medium.png');
+        Media::watermarkImage(Storage::disk('public')->get("uploads/{$directory}/{$this->media->id}_MEDIUM.{$extension}"), storage_path($upload_directory) . $this->media->id . '_MEDIUM.' . $extension, 80, 80, 'corbpie_watermark_medium.png');
 
         //Delete the original uploaded file
         Storage::disk('private')->delete("process/{$this->media->id}.{$extension}");
