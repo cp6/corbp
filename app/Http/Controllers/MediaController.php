@@ -41,7 +41,8 @@ class MediaController extends Controller
         //dd($media);
         return Inertia::render('Media/Show', [
             'media' => $media,
-            'image' => (!is_null($media->location)) ? asset("media/{$media->location->dir}/{$media->id}.{$media->extension}") : asset("media/default/{$media->id}.{$media->extension}"),
+            'medium_link' => (!is_null($media->location)) ? asset("media/{$media->location->dir}/{$media->id}_MEDIUM.{$media->extension}") : asset("media/default/{$media->id}_MEDIUM.{$media->extension}"),
+            'full_link' => (!is_null($media->location)) ? asset("media/{$media->location->dir}/{$media->id}.{$media->extension}") : asset("media/default/{$media->id}.{$media->extension}"),
             'response' => \Session::get('response')
         ]);
     }
