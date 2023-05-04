@@ -38,7 +38,7 @@ class MediaController extends Controller
 
     public function show(Media $media): \Inertia\Response
     {
-        dd($media);
+        //dd($media);
         return Inertia::render('Media/Show', [
             'media' => $media,
             'response' => \Session::get('response')
@@ -182,7 +182,7 @@ class MediaController extends Controller
 
                     $title_desc = new TitleDescription();
                     $title_desc->id = $media_id;
-                    $title_desc->title = null;
+                    $title_desc->title = $media_id;
                     $title_desc->description = null;
                     $title_desc->save();
 
