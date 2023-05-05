@@ -16,11 +16,16 @@ class Media extends Model
 
     protected $fillable = ['parent_id', 'slug', 'group_upload_sequence', 'directory_id', 'location_id', 'sub_location_id', 'processed', 'display', 'is_parent', 'is_thumbnail', 'type', 'original_filename', 'extension', 'width', 'height', 'size', 'has_watermark'];
 
-    protected $with = ['parent', 'location', 'sub_location', 'titleDesc'];
+    protected $with = ['parent', 'location', 'sub_location', 'titleDesc', 'exif'];
 
     public function parent(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(__CLASS__, 'id', 'parent_id');
+    }
+
+    public function exif(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Exif::class, 'media_id', 'id');
     }
 
     public function titleDesc(): \Illuminate\Database\Eloquent\Relations\HasOne
