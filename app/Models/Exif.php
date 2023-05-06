@@ -12,4 +12,15 @@ class Exif extends Model
 
     protected $fillable = ['media_id', 'device_id', 'lens_id', 'iso_raw', 'iso', 'f_stop', 'exposure', 'shutter_speed_raw', 'shutter_speed', 'focal_length', 'lat', 'lon', 'direction', 'height', 'software', 'captured_at'];
 
+    protected $with = ['device', 'lens'];
+
+    public function device(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Device::class, 'id', 'device_id');
+    }
+    public function lens(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Lense::class, 'id', 'lens_id');
+    }
+
 }
