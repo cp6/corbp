@@ -3,7 +3,7 @@ import {Head} from "@inertiajs/react";
 import ResponseAlert from "@/Components/ResponseAlert";
 import CreateButton from "@/Components/CreateButton";
 
-export default function MainLayout({auth, title, header, children, response = null, media = false}) {
+export default function MainLayout({auth, title, header, children, response = null, media = false, media_id = null}) {
 
     return (
         <>
@@ -23,7 +23,7 @@ export default function MainLayout({auth, title, header, children, response = nu
                                         {
                                             (() => {
                                                 if (auth.user !== null) {
-                                                    return (<CreateButton text={'Edit media'} link={route('media.edit', 1)}/>);
+                                                    return (<CreateButton text={'Edit media'} link={route('media.edit', media_id)}/>);
                                                 }
                                             })()
                                         }

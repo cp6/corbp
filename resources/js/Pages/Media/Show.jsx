@@ -10,7 +10,7 @@ export default function Show(props) {
     const sub_location = (media.sub_location !== null) ? media.sub_location.name : '';
 
     return (
-        <MainLayout auth={props.auth} title={media.title_desc.title} header={media.title_desc.title} media={true}>
+        <MainLayout auth={props.auth} title={media.title_desc.title} header={media.title_desc.title} media={true} media_id={media.id}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 <ImageCard>
                     <div className={'grid grid-cols-12'}>
