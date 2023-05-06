@@ -12,9 +12,11 @@ export default function Edit(props) {
     const auth = props.auth;
     const response = props.response;
     const resource = props.media;
+    const locations = props.locations;
 
     const {data, setData, patch, errors, processing, recentlySuccessful} = useForm({
         slug: resource.slug || '',
+        location_id: resource.location_id || '',
         title: resource.title_desc.title || '',
         description: resource.title_desc.description || '',
     });
@@ -54,6 +56,19 @@ export default function Edit(props) {
                                     onChange={(e) => setData('description', e.target.value)}
                                 />
                                 <InputError message={errors.description}/>
+                            </div>
+                            <div className={'col-span-1 md:col-span-6'}>
+                                <InputLabel htmlFor="location_id" value="Location"/>
+                                <select onChange={(e) => setData('location_id', e.target.value)}
+                                        name="location_id"
+                                        value={data.location_id}
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                >
+                                    <option value=''>None</option>
+                                    {locations.map(location => <option key={location.id}
+                                                                       value={location.id}>{location.name}</option>)}
+                                </select>
+                                <InputError message={errors.location_id}/>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">

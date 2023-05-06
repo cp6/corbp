@@ -51,6 +51,7 @@ class MediaController extends Controller
     {
         return Inertia::render('Media/Edit', [
             'media' => $media,
+            'locations' => Location::get(),
             'response' => \Session::get('response')
         ]);
     }
@@ -61,13 +62,14 @@ class MediaController extends Controller
             'slug' => 'string|required|max:64',
             'title' => 'string|sometimes|nullable|max:64',
             'description' => 'string|sometimes|nullable|max:255',
+            'location_id' => 'numeric|sometimes|nullable',
         ]);
 
         $media_response = $media->update($request->all());
 
         $title_desc_response = $media->titleDesc()->update([
             'title' => $request->title ?? $media->titleDesc->title,
-            'description' => $request->description ?? $media->titleDesc->description
+            'description' => $request->description ?? $media->titleDesc->description,
         ]);
 
         if ($media_response && $title_desc_response) {
