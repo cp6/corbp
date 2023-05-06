@@ -22,10 +22,16 @@ export default function Show(props) {
                             <p className={'text-gray-700 dark:text-gray-300'}>{location} {sub_location}</p>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-center'}>
-                            <p className={'text-gray-700 dark:text-gray-300'}>SAMPLE</p>
+                            <p className={'text-gray-700 dark:text-gray-300'}></p>
                         </div>
                         <div className={'col-span-12 md:col-span-4 md:text-end'}>
                             <p className={'text-gray-700 dark:text-gray-300 mr-2'}>{format(new Date(media.exif.captured_at), 'do LLLL yyyy hh:mm:ss a ')}</p>
+                        </div>
+                        <div className={'col-span-12 md:col-span-6 text-start ml-2'}>
+                            <p className={'text-gray-700 dark:text-gray-300'}>{media.exif.device.name} with {media.exif.lens.name}</p>
+                        </div>
+                        <div className={'col-span-12 md:col-span-6 md:text-end'}>
+                            <p className={'text-gray-700 dark:text-gray-300 mr-2'}>{media.exif.f_stop_raw} {media.exif.focal_length}mm {media.exif.shutter_speed_raw} ISO {media.exif.iso}</p>
                         </div>
                     </div>
                 </ImageCard>
