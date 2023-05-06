@@ -9,7 +9,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/random', [MediaController::class, 'getRandom'])->name('random');
@@ -17,6 +16,7 @@ Route::get('/random', [MediaController::class, 'getRandom'])->name('random');
 Route::get('/stats', [MediaController::class, 'statsPage'])->name('stats');
 
 Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
+Route::get('/locations/create', [LocationController::class, 'create'])->middleware(['auth'])->name('locations.create');
 Route::get('/locations/{location:slug}', [LocationController::class, 'show'])->name('locations.show');
 
 Route::get('/devices', [DeviceController::class, 'index'])->name('device.index');
@@ -40,7 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/m/{media}', [MediaController::class, 'update'])->name('media.update');
 
     //Locations
-    Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
     Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
     Route::get('/locations/{location:slug}/edit', [LocationController::class, 'edit'])->name('locations.edit');
     Route::patch('/locations/{location}', [LocationController::class, 'update'])->name('locations.update');
