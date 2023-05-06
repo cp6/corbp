@@ -25,7 +25,7 @@ export default function Edit(props) {
     };
 
     return (
-        <MainLayout auth={auth} title={'Edit media ' + resource.id} header={'Edit media: ' + resource.slug}>
+        <MainLayout auth={auth} title={'Edit media ' + resource.title_desc.title} header={'Edit: ' + resource.title_desc.title}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
