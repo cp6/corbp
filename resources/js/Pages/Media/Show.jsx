@@ -6,8 +6,8 @@ export default function Show(props) {
 
     const media = props.media;
 
-    const location = (media.location !== null) ? media.location.name : '';
-    const sub_location = (media.sub_location !== null) ? media.sub_location.name : '';
+    const location_text = (media.location !== null) ? <a href={route('locations.show', media.location.slug)}>{media.location.name}</a> : '';
+    const sub_location_text = (media.sub_location !== null) ? <a href={route('locations.show', media.sub_location_id)}>{media.sub_location.name}</a> : '';
 
     return (
         <MainLayout auth={props.auth} title={media.title_desc.title} header={media.title_desc.title} media={true} media_id={media.id}>
@@ -19,7 +19,7 @@ export default function Show(props) {
                                                            title={media.title_desc.title} alt={media.title_desc.title}/></a>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-start ml-2'}>
-                            <p className={'text-gray-700 dark:text-gray-300'}><a href={route('locations.show', media.location_id)}>{location}</a> {sub_location}</p>
+                            <p className={'text-gray-700 dark:text-gray-300'}>{location_text} {sub_location_text}</p>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-center'}>
                             <p className={'text-gray-700 dark:text-gray-300'}></p>
