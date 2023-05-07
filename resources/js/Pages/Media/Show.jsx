@@ -19,7 +19,7 @@ export default function Show(props) {
                                                            title={media.title_desc.title} alt={media.title_desc.title}/></a>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-start ml-2'}>
-                            <p className={'text-gray-700 dark:text-gray-300'}>{location} {sub_location}</p>
+                            <p className={'text-gray-700 dark:text-gray-300'}><a href={route('locations.show', media.location_id)}>{location}</a> {sub_location}</p>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-center'}>
                             <p className={'text-gray-700 dark:text-gray-300'}></p>
