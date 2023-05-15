@@ -25,10 +25,16 @@ class MediaController extends Controller
         ]);
     }
 
-    public function create(): \Inertia\Response
+    public function create()
     {
+        $locations = Location::get();
+
+        if ($locations->count() === 0) {
+            return redirect(route('locations.create'))->with(['response' => ['type' => 'failure', 'message' => 'You must have at least 1 location before uploading']]);
+        }
+
         return Inertia::render('Upload', [
-            'locations' => Location::get(),
+            'locations' => $locations,
             'sub_locations' => SubLocation::get(),
             'upload_size' => ini_get('upload_max_filesize'),
             'files_upload' => ini_get('max_file_uploads'),

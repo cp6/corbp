@@ -53,7 +53,7 @@ export default function Create(props) {
     };
 
     return (
-        <MainLayout auth={auth} title={'Add location'} header={'Add a location'}>
+        <MainLayout auth={auth} title={'Add location'} header={'Add a location'} response={response}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
