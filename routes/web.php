@@ -26,6 +26,7 @@ Route::get('/lenses', [LenseController::class, 'index'])->name('lense.index');
 Route::get('/lenses/{lense:slug}', [LenseController::class, 'show'])->name('lense.show');
 
 Route::get('/tags', [TagController::class, 'index'])->name('tag.index');
+Route::get('/tags/create', [TagController::class, 'create'])->middleware(['auth'])->name('tag.create');
 Route::get('/tags/{tag:slug}', [TagController::class, 'show'])->name('tag.show');
 
 Route::get('/m/{media}', [MediaController::class, 'show'])->name('media.show');
@@ -60,7 +61,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/lenses/{lense}', [LenseController::class, 'destroy'])->name('lense.destroy');
 
     //Tags
-    Route::get('/tags/create', [TagController::class, 'create'])->name('tag.create');
     Route::post('/tags', [TagController::class, 'store'])->name('tag.store');
     Route::get('/tags/{tag:slug}/edit', [TagController::class, 'edit'])->name('tags.edit');
     Route::patch('/tags/{tag}', [TagController::class, 'update'])->name('tag.update');
