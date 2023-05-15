@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -54,6 +55,8 @@ class ProcessUpload implements ShouldQueue
         $media->location->increment('count');//Add 1 to location media count
 
         $media->update(['processed' => 1, 'display' => 1]);//Mark media as processed and displayable
+
+        Cache::forget("media.location.{$media->location->id}");//Clear the media for location cache
 
         Log::debug("ProcessUpload FINISHED: {$media->id}");
     }

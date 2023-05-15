@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -62,6 +63,7 @@ class LocationController extends Controller
     {
         return Inertia::render('Location/Show', [
             'location' => $location,
+            'media' => Media::forLocation($location),
             'response' => \Session::get('response')
         ]);
     }
