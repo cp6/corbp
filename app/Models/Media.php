@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
 
@@ -68,13 +69,20 @@ class Media extends Model
         });
     }
 
+    public static function forLocation(Location $location): \Illuminate\Database\Eloquent\Collection
+    {
+        return Cache::remember("media.location.{$location->id}", now()->addMonths(3), function () use ($location) {
+            return self::without(['location', 'directory'])->where('location_id', $location->id)->orderBy('created_at', 'desc')->get();
+        });
+    }
+
     public static function createSmallerImage($image, string $save_as, int $width = 180, int $height = 140): \Intervention\Image\Image
     {
         $img = Image::make($image)->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
         });
 
-        return $img->save($save_as, 98);
+        return $img->save($save_as, 96);
     }
 
     public static function watermarkImage($image, string $save_as, int $x = 40, int $y = 40, string $watermark_filename = 'corbpie_watermark_medium.png'): \Intervention\Image\Image

@@ -16,7 +16,7 @@ class Location extends Model
 
     public function media(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Media::class, 'location_id', 'id')->where('is_parent', 1);
+        return $this->hasMany(Media::class, 'location_id', 'id');
     }
 
     public function sub_locations(): \Illuminate\Database\Eloquent\Relations\HasMany
