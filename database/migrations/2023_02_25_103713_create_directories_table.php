@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('directories', function (Blueprint $table) {
             $table->id();
             $table->char('name', 8)->unique();
-            $table->integer('count')->nullable()->default(null);
+            $table->integer('count')->default(0);
             $table->timestamps();
         });
     }
