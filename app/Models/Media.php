@@ -16,7 +16,12 @@ class Media extends Model
 
     protected $fillable = ['parent_id', 'slug', 'group_upload_sequence', 'directory_id', 'location_id', 'sub_location_id', 'processed', 'display', 'is_parent', 'is_thumbnail', 'type', 'original_filename', 'extension', 'width', 'height', 'size', 'has_watermark'];
 
-    protected $with = ['location', 'sub_location', 'titleDesc', 'exif'];
+    protected $with = ['directory', 'location', 'sub_location', 'titleDesc', 'exif'];
+
+    public function directory(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Directory::class, 'id', 'directory_id');
+    }
 
     public function exif(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
