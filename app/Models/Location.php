@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class Location extends Model
@@ -30,6 +31,13 @@ class Location extends Model
             'query' => $location,
             'country_module' => 1
         ])->json();
+    }
+
+    public static function randoms(int $amount = 4)
+    {
+        return Cache::remember("r_locations.{$amount}", now()->addSeconds(30), function () use ($amount) {
+            return self::inRandomOrder()->take($amount)->get();
+        });
     }
 
 }
