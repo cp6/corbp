@@ -107,7 +107,7 @@ class MediaController extends Controller
         ]);
 
         if ($request->file('files') !== null) {
-            $directory = Directory::randomDirectory();
+            $directory = Directory::random();
 
             if (isset($request->location_id)) {
                 $location = Location::where('id', $request->location_id)->first();
@@ -135,7 +135,7 @@ class MediaController extends Controller
                 //Get exif information
                 //This has to be done before the file is saved to the disk
                 $exif_data = Image::make($file)->exif();
-                Storage::disk('private')->put("exif/{$directory['name']}/{$media_id}.json", json_encode($exif_data));
+                Storage::disk('private')->put("exif/{$directory->name}/{$media_id}.json", json_encode($exif_data));
                 //dd($exif_data);
                 $height = $exif_data['COMPUTED']['Height'] ?? null;
                 $width = $exif_data['COMPUTED']['Width'] ?? null;
@@ -180,7 +180,7 @@ class MediaController extends Controller
                     $media->size = $size;
                     $media->height = $height ?? null;
                     $media->width = $width ?? null;
-                    $media->directory_id = $directory['id'] ?? null;
+                    $media->directory_id = $directory->id;
                     $media->original_filename = $file->getClientOriginalName();
                     $media->save();
 

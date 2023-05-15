@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use stdClass;
 
 class Directory extends Model
 {
@@ -13,28 +14,22 @@ class Directory extends Model
     protected $fillable = ['name', 'count'];
 
     public static function cached(): array
-    {//Cache the directories into an array
-        return Cache::remember("directories", now()->addMonth(1), function () {
+    {//Cache ALL the directories into an array
+        return Cache::remember("directories", now()->addMonths(3), function () {
             return self::get(['id','name'])->toArray();
         });
     }
 
-    public static function randomDirectory(): array
+    public static function random(): stdClass
     {//Return one directory randomly selected from available
         $array = self::cached();
-        return $array[random_int(0, count($array) - 1)];
-    }
+        $result = $array[random_int(0, count($array) - 1)];
 
-    public static function generateDirectories(): void
-    {//Generate the random directories
-        $amount = env("UNIQUE_DIRECTORIES", 12);
+        $obj = new stdClass();
+        $obj->id = $result['id'];
+        $obj->name = $result['name'];
 
-        for ($i = 1; $i <= $amount; $i++) {
-            $directory = new Directory();
-            $directory->name = \Str::random(8);
-            $directory->save();
-        }
-
+        return $obj;
     }
 
 }
