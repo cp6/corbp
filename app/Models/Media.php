@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
 
 class Media extends Model
@@ -17,6 +18,16 @@ class Media extends Model
     protected $fillable = ['parent_id', 'slug', 'group_upload_sequence', 'directory_id', 'location_id', 'sub_location_id', 'processed', 'display', 'is_parent', 'is_thumbnail', 'type', 'original_filename', 'extension', 'width', 'height', 'size', 'has_watermark'];
 
     protected $with = ['directory', 'location', 'sub_location', 'titleDesc', 'exif'];
+
+    protected static function booted(): void
+    {
+        static::retrieved(function (Media $media) {
+            $media->asset = asset("media/{$media->directory->name}/{$media->id}.{$media->extension}");
+            $media->asset_small = asset("media/{$media->directory->name}/{$media->id}_SMALL.{$media->extension}");
+            $media->asset_medium = asset("media/{$media->directory->name}/{$media->id}_MEDIUM.{$media->extension}");
+            $media->asset_thumbnail = asset("media/{$media->directory->name}/{$media->id}_THUMB.{$media->extension}");
+        });
+    }
 
     public function directory(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
@@ -41,6 +52,20 @@ class Media extends Model
     public function sub_location(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(SubLocation::class, 'id', 'sub_location_id');
+    }
+
+    public static function amount()
+    {
+        return Cache::remember("amount", now()->addMinutes(2), function () {
+            return self::count();
+        });
+    }
+
+    public static function latest(int $amount = 4)
+    {
+        return Cache::remember("latest.{$amount}", now()->addMinutes(2), function () {
+            return self::where('processed', 1)->orderBy('created_at', 'desc')->get();
+        });
     }
 
     public static function createSmallerImage($image, string $save_as, int $width = 180, int $height = 140): \Intervention\Image\Image

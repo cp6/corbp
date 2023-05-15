@@ -15,7 +15,7 @@ export default function Show(props) {
                 <ImageCard>
                     <div className={'grid grid-cols-12'}>
                         <div className={'col-span-12 mb-2'}>
-                            <a href={props.full_link}><img className={'w-full rounded-md'} src={props.medium_link}
+                            <a href={media.asset}><img className={'w-full rounded-md'} src={media.asset_medium}
                                                            title={media.title_desc.title} alt={media.title_desc.title}/></a>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-start ml-2'}>
