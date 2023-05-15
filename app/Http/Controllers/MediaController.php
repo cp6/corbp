@@ -107,7 +107,7 @@ class MediaController extends Controller
     {
         $request->validate([
             'files' => 'required',
-            'location_id' => 'integer|nullable|sometimes:',
+            'location_id' => 'integer|required',
         ]);
 
         if ($request->file('files') !== null) {
