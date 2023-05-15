@@ -23,8 +23,7 @@ class ProcessUpload implements ShouldQueue
 
     public function handle(): void
     {
-        Log::debug("Queue working: {$this->media->id}");
-        Log::debug($this->media);
+        Log::debug("ProcessUpload STARTED: {$this->media->id} {$this->media->original_filename} {$this->media->width}x{$this->media->height} " . number_format($this->media->height / 1024, 2) . "MB");
 
         $file = Storage::disk('private')->get("process/{$this->media->id}.{$this->media->extension}");
 
@@ -52,6 +51,8 @@ class ProcessUpload implements ShouldQueue
         $this->media->directory->increment('count');//Add 1 to directory count
 
         $this->media->update(['processed' => 1, 'display' => 1]);//Mark media as processed and displayable
+
+        Log::debug("ProcessUpload FINISHED: {$this->media->id}");
     }
 
 }
