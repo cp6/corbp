@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
              'api_token' => 'vASuNoCPgjiBxfhookSdiIQVNEu2kAZy0buHpeCUTFkg7bOtXFxT3CWGNvcg5KMC'
          ]);
 
-        $amount = env("UNIQUE_DIRECTORIES", 12);
+        $amount = env("UNIQUE_DIRECTORIES", 20);
 
         for ($i = 1; $i <= $amount; $i++) {
             $directory = new Directory();
