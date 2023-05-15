@@ -50,7 +50,8 @@ class ProcessUpload implements ShouldQueue
         //Delete the original uploaded file
         Storage::disk('private')->delete("process/{$media->id}.{$extension}");
 
-        $media->directory->increment('count');//Add 1 to directory count
+        $media->directory->increment('count');//Add 1 to directory media count
+        $media->location->increment('count');//Add 1 to location media count
 
         $media->update(['processed' => 1, 'display' => 1]);//Mark media as processed and displayable
 
