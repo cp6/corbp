@@ -12,7 +12,7 @@ class LocationController extends Controller
     public function index(Request $request): \Inertia\Response
     {
         return Inertia::render('Location/Index', [
-            'locations' => Location::Paginate(2)
+            'locations' => Location::Paginate(8)
         ]);
     }
 
