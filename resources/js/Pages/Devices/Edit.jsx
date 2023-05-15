@@ -6,6 +6,7 @@ import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import ResponseText from "@/Components/ResponseText";
+import {slugify} from "@/Helpers";
 
 export default function Edit(props) {
 
@@ -25,6 +26,7 @@ export default function Edit(props) {
         e.preventDefault();
         patch(route('device.update', resource.id));
     };
+
 
     return (
         <MainLayout auth={auth} title={'Edit device ' + resource.name} header={'Edit device: ' + resource.name}>
@@ -54,7 +56,7 @@ export default function Edit(props) {
                                 <InputLabel htmlFor="slug" value="Slug"/>
                                 <TextInput
                                     value={data.slug}
-                                    onChange={(e) => setData('slug', e.target.value)}
+                                    onChange={(e) => setData('slug', slugify(e.target.value))}
                                 />
                                 <InputError message={errors.slug}/>
                             </div>
