@@ -100,7 +100,7 @@ class MediaController extends Controller
 
         }
 
-       $media_response = $media->update([
+        $media_response = $media->update([
             'slug' => $request->slug,
             'location_id' => $request->location_id
         ]);
@@ -290,9 +290,10 @@ class MediaController extends Controller
         ]);
     }
 
-    public static function getRandom(): string
+    public static function getRandom(): \Illuminate\Http\RedirectResponse
     {
-        return "Not in use yet but here is a random string " . \Str::random(24);
+        $media = Media::where('display', 1)->inRandomOrder()->first();
+        return redirect()->route('media.show', $media);
     }
 
 }
