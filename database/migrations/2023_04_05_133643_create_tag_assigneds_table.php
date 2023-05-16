@@ -15,6 +15,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
             $table->foreign('media_id')->references('id')->on('media')->onDelete('cascade');
+            $table->unique(['tag_id', 'media_id']);
         });
     }
 
