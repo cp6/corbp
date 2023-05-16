@@ -15,14 +15,14 @@ class DeviceController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): void
     {
-        //
+        abort(404);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): void
     {
-        //
+        abort(404);
     }
 
     public function show(Device $device): \Inertia\Response
