@@ -18,17 +18,7 @@ class Media extends Model
 
     protected $fillable = ['parent_id', 'slug', 'group_upload_sequence', 'directory_id', 'location_id', 'sub_location_id', 'processed', 'display', 'is_parent', 'is_thumbnail', 'type', 'original_filename', 'extension', 'width', 'height', 'size', 'has_watermark'];
 
-    protected $with = ['directory', 'location', 'sub_location', 'titleDesc', 'exif'];
-
-    protected static function booted(): void
-    {
-        static::retrieved(function (Media $media) {
-            $media->asset = asset("media/{$media->directory->name}/{$media->id}.{$media->extension}");
-            $media->asset_small = asset("media/{$media->directory->name}/{$media->id}_SMALL.{$media->extension}");
-            $media->asset_medium = asset("media/{$media->directory->name}/{$media->id}_MEDIUM.{$media->extension}");
-            $media->asset_thumbnail = asset("media/{$media->directory->name}/{$media->id}_THUMB.{$media->extension}");
-        });
-    }
+    protected $with = ['directory', 'location', 'sub_location', 'titleDesc', 'exif', 'tags'];
 
     public function directory(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
@@ -54,6 +44,12 @@ class Media extends Model
     {
         return $this->hasOne(SubLocation::class, 'id', 'sub_location_id');
     }
+
+    public function tags(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TagAssigned::class, 'media_id', 'id');
+    }
+
 
     public static function amount()
     {

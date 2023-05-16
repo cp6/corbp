@@ -1,6 +1,8 @@
 import MainLayout from "@/Layouts/MainLayout";
 import ImageCard from "@/Components/ImageCard";
 import {format} from "date-fns";
+import {HiCalendar, HiCamera, HiCog, HiGlobe} from "react-icons/hi";
+import {asset} from "@/Helpers";
 
 export default function Show(props) {
 
@@ -15,23 +17,23 @@ export default function Show(props) {
                 <ImageCard>
                     <div className={'grid grid-cols-12'}>
                         <div className={'col-span-12 mb-2'}>
-                            <a href={media.asset}><img className={'w-full rounded-md'} src={media.asset_medium}
+                            <a href={asset(media.directory.name, media.id, media.extension)}><img className={'w-full rounded-md'} src={asset(media.directory.name, media.id, media.extension, 'MEDIUM')}
                                                            title={media.title_desc.title} alt={media.title_desc.title}/></a>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-start ml-2'}>
-                            <p className={'text-gray-700 dark:text-gray-300'}>{location_text} {sub_location_text}</p>
+                            <p className={'text-gray-700 dark:text-gray-300'}><HiGlobe className={'h-5 w-5 mr-1 mb-1 inline'}/>{location_text} {sub_location_text}</p>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-center'}>
                             <p className={'text-gray-700 dark:text-gray-300'}></p>
                         </div>
                         <div className={'col-span-12 md:col-span-4 md:text-end'}>
-                            <p className={'text-gray-700 dark:text-gray-300 mr-2'}>{format(new Date(media.exif.captured_at), 'do LLLL yyyy hh:mm:ss a ')}</p>
+                            <p className={'text-gray-700 dark:text-gray-300 mr-2'}><HiCalendar className={'h-5 w-5 mr-1 mb-1 inline'}/>{format(new Date(media.exif.captured_at), 'do LLLL yyyy hh:mm:ss a ')}</p>
                         </div>
                         <div className={'col-span-12 md:col-span-6 text-start ml-2'}>
-                            <p className={'text-gray-700 dark:text-gray-300'}>{media.exif.device.name} with {media.exif.lens.name}</p>
+                            <p className={'text-gray-700 dark:text-gray-300'}><HiCamera className={'h-5 w-5 mr-1 mb-1 inline'}/>{media.exif.device.name} with {media.exif.lens.name}</p>
                         </div>
                         <div className={'col-span-12 md:col-span-6 md:text-end'}>
-                            <p className={'text-gray-700 dark:text-gray-300 mr-2'}>{media.exif.f_stop_raw} {media.exif.focal_length}mm {media.exif.shutter_speed_raw} ISO {media.exif.iso}</p>
+                            <p className={'text-gray-700 dark:text-gray-300 mr-2'}><HiCog className={'h-5 w-5 mr-1 mb-1 inline'}/>{media.exif.f_stop_raw} {media.exif.focal_length}mm {media.exif.shutter_speed_raw} ISO {media.exif.iso}</p>
                         </div>
                     </div>
                 </ImageCard>

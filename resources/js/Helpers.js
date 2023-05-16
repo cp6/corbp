@@ -6,3 +6,10 @@ export const slugify = (string) => {
         .replace('_', '-')
         .replace(/[-\s]+/g, '-');
 }
+
+export const asset = (directory, id, extension, size = '') => {
+    if (size !== '') {
+        size = '_' + size;
+    }
+    return route('home') + "/media/" + directory + "/" + id + size + "." + extension
+}
