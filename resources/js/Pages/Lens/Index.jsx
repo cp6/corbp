@@ -10,7 +10,7 @@ export default function Index(props) {
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 <div className="grid gap-2 grid-cols-2 sm:grid-cols-4 sm:gap-4">
                     {props.lens.data.map(lense =>
-                        <a key={lense.id} href={route('lense.show', lense.slug)}>
+                        <a key={lense.id} href={route('lens.show', lense.slug)}>
                             <Card>
                                 <h1 className={'font-semibold text-gray-800 dark:text-white'}>{lense.name} <span
                                     className={'font-light text-gray-500 dark:text-gray-400'}>{lense.media_count}</span>

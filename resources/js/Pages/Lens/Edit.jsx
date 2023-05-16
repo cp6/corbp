@@ -28,7 +28,7 @@ export default function Edit(props) {
 
     const submit = (e) => {
         e.preventDefault();
-        patch(route('lense.update', resource.id));
+        patch(route('lens.update', resource.id));
     };
 
     return (

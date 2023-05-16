@@ -51,7 +51,7 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                             <NavLink href={route('device.index')} active={route().current('device.*')}>
                                 Devices
                             </NavLink>
-                            <NavLink href={route('lense.index')} active={route().current('lense.*')}>
+                            <NavLink href={route('lens.index')} active={route().current('lens.*')}>
                                 Lens
                             </NavLink>
                             <NavLink href={route('tag.index')} active={route().current('tag.*')}>
@@ -191,7 +191,7 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                     <ResponsiveNavLink href={route('device.index')} active={route().current('device.*')}>
                         Devices
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink href={route('lense.index')} active={route().current('lense.*')}>
+                    <ResponsiveNavLink href={route('lens.index')} active={route().current('lens.*')}>
                         Lens
                     </ResponsiveNavLink>
                     <ResponsiveNavLink href={route('tag.index')} active={route().current('tag.*')}>

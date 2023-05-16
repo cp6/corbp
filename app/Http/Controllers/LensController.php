@@ -58,10 +58,10 @@ class LensController extends Controller
         $response = $lens->update($request->all());
 
         if ($response) {
-            return redirect(route('lense.edit', $lens))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
+            return redirect(route('lens.edit', $lens))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
         }
 
-        return redirect(route('lense.edit', $lens))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
+        return redirect(route('lens.edit', $lens))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
     }
 
     public function destroy(Lens $lens)
@@ -69,9 +69,9 @@ class LensController extends Controller
         try {
             $lens->delete();
         } catch (\Exception $exception) {
-            return redirect(route('lense.show', $lens))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
+            return redirect(route('lens.show', $lens))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
         }
 
-        return redirect(route('lense.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
+        return redirect(route('lens.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
     }
 }
