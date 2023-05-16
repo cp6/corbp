@@ -24,6 +24,13 @@ class Location extends Model
         return $this->hasMany(SubLocation::class, 'location_id', 'id');
     }
 
+    public static function cached()
+    {
+        return Cache::remember("locations", now()->addDays(2), function () {
+            return self::get();
+        });
+    }
+
     public static function getGeoApiData(string $location)
     {
         return Http::get('http://api.positionstack.com/v1/forward', [

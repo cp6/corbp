@@ -10,6 +10,7 @@ use App\Models\Lense;
 use App\Models\Location;
 use App\Models\Media;
 use App\Models\SubLocation;
+use App\Models\Tag;
 use App\Models\TitleDescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,7 @@ class MediaController extends Controller
 
     public function create()
     {
-        $locations = Location::get();
+        $locations = Location::cached();
 
         if ($locations->count() === 0) {
             return redirect(route('locations.create'))->with(['response' => ['type' => 'failure', 'message' => 'You must have at least 1 location before uploading']]);
@@ -55,7 +56,8 @@ class MediaController extends Controller
     {
         return Inertia::render('Media/Edit', [
             'media' => $media,
-            'locations' => Location::get(),
+            'tags' => Tag::cached(),
+            'locations' => Location::cached(),
             'response' => \Session::get('response')
         ]);
     }

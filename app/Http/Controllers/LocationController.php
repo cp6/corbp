@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Location;
 use App\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -55,6 +56,8 @@ class LocationController extends Controller
             return redirect(route('locations.create'))->with(['response' => ['type' => 'failure', 'message' => 'Could not be created: ' . $exception->getMessage()]]);
         }
 
+        Cache::forget("locations");
+
         return redirect(route('locations.create'))->with(['response' => ['type' => 'success', 'message' => 'Successfully created']]);
 
     }
@@ -95,6 +98,8 @@ class LocationController extends Controller
             return redirect(route('locations.edit', $location))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
         }
 
+        Cache::forget("locations");
+
         return redirect(route('locations.edit', $location))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
     }
 
@@ -105,6 +110,8 @@ class LocationController extends Controller
         } catch (\Exception $exception) {
             return redirect(route('locations.show', $location))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
         }
+
+        Cache::forget("locations");
 
         return redirect(route('locations.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
     }
