@@ -12,6 +12,11 @@ class Tag extends Model
 
     protected $fillable = ['slug', 'name', 'count'];
 
+    public function assigned(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TagAssigned::class, 'tag_id', 'tag_id');
+    }
+
     public static function cached()
     {
         return Cache::remember("tags", now()->addDays(2), function () {
