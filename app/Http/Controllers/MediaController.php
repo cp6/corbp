@@ -11,6 +11,7 @@ use App\Models\Location;
 use App\Models\Media;
 use App\Models\SubLocation;
 use App\Models\Tag;
+use App\Models\TagAssigned;
 use App\Models\TitleDescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -54,6 +55,7 @@ class MediaController extends Controller
 
     public function edit(Media $media): \Inertia\Response
     {
+        //dd($media);
         return Inertia::render('Media/Edit', [
             'media' => $media,
             'tags' => Tag::cached(),
@@ -69,9 +71,39 @@ class MediaController extends Controller
             'title' => 'string|sometimes|nullable|max:64',
             'description' => 'string|sometimes|nullable|max:255',
             'location_id' => 'numeric|sometimes|nullable',
+            'tag1' => 'integer|sometimes|nullable',
+            'tag2' => 'integer|sometimes|nullable',
+            'tag3' => 'integer|sometimes|nullable',
+            'tag4' => 'integer|sometimes|nullable',
+            'tag5' => 'integer|sometimes|nullable',
+            'tag6' => 'integer|sometimes|nullable'
         ]);
 
-        $media_response = $media->update($request->all());
+        if ($request->tag1 !== null || $request->tag2 !== null || $request->tag3 !== null || $request->tag4 !== null || $request->tag5 !== null || $request->tag6 !== null) {
+            TagAssigned::where('media_id', $media->id)->delete();//Delete all assigned tags for this media
+        }
+
+        for ($i = 1; $i <= 6; $i++) {
+            $pointer = "tag{$i}";
+
+            if (!is_null($request->{$pointer})) {
+
+                try {
+                    $ta = new TagAssigned();
+                    $ta->media_id = $media->id;
+                    $ta->tag_id = $request->{$pointer};
+                    $ta->save();
+                } catch (\Exception $exception) {
+                    \Log::debug($exception->getMessage());
+                }
+            }
+
+        }
+
+       $media_response = $media->update([
+            'slug' => $request->slug,
+            'location_id' => $request->location_id
+        ]);
 
         $title_desc_response = $media->titleDesc()->update([
             'title' => $request->title ?? $media->titleDesc->title,
