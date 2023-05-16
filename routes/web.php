@@ -6,6 +6,7 @@ use App\Http\Controllers\LenseController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubLocationController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,10 @@ Route::get('/stats', [MediaController::class, 'statsPage'])->name('stats');
 Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
 Route::get('/locations/create', [LocationController::class, 'create'])->middleware(['auth'])->name('locations.create');
 Route::get('/locations/{location:slug}', [LocationController::class, 'show'])->name('locations.show');
+
+Route::get('/sub-locations', [SubLocationController::class, 'index'])->name('sub-location.index');
+Route::get('/sub-locations/create', [SubLocationController::class, 'create'])->middleware(['auth'])->name('sub-location.create');
+Route::get('/sub-locations/{subLocation:slug}', [SubLocationController::class, 'show'])->name('sub-location.show');
 
 Route::get('/devices', [DeviceController::class, 'index'])->name('device.index');
 Route::get('/devices/{device:slug}', [DeviceController::class, 'show'])->name('device.show');
@@ -45,6 +50,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/locations/{location:slug}/edit', [LocationController::class, 'edit'])->name('locations.edit');
     Route::patch('/locations/{location}', [LocationController::class, 'update'])->name('locations.update');
     Route::delete('/locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
+
+    //Sub locations
+    Route::post('/sub-locations', [SubLocationController::class, 'store'])->name('sub-location.store');
+    Route::get('/sub-locations/{subLocation:slug}/edit', [SubLocationController::class, 'edit'])->name('sub-location.edit');
+    Route::patch('/sub-locations/{subLocation}', [SubLocationController::class, 'update'])->name('sub-location.update');
+    Route::delete('/sub-locations/{subLocation}', [SubLocationController::class, 'destroy'])->name('sub-location.destroy');
 
     //Devices
     Route::get('/devices/create', [DeviceController::class, 'create'])->name('device.create');
