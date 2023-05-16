@@ -7,6 +7,7 @@ import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import ResponseText from "@/Components/ResponseText";
 import {slugify} from "@/Helpers";
+import CreateButton from "@/Components/CreateButton";
 
 export default function Edit(props) {
 
@@ -39,6 +40,13 @@ export default function Edit(props) {
         <MainLayout auth={auth} title={'Edit media ' + resource.title_desc.title}
                     header={'Edit: ' + resource.title_desc.title}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
+                {
+                    (() => {
+                        if (auth.user !== null) {
+                            return (<CreateButton text={'Back to media'} link={route('media.show', resource.id)}/>);
+                        }
+                    })()
+                }
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
                         <div className={'grid grid-cols-1 md:grid-cols-6 md:gap-4 mb-2'}>
