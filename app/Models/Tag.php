@@ -12,6 +12,13 @@ class Tag extends Model
 
     protected $fillable = ['slug', 'name', 'count'];
 
+    public static function cached()
+    {
+        return Cache::remember("tags", now()->addDays(2), function () {
+            return self::get();
+        });
+    }
+
     public static function randoms(int $amount = 4)
     {
         return Cache::remember("r_tags.{$amount}", now()->addSeconds(30), function () use ($amount) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 
 class TagController extends Controller
@@ -40,6 +41,8 @@ class TagController extends Controller
             return redirect(route('tag.create'))->with(['response' => ['type' => 'failure', 'message' => 'Could not be created: ' . $exception->getMessage()]]);
         }
 
+        Cache::forget("tags");
+
         return redirect(route('tag.create'))->with(['response' => ['type' => 'success', 'message' => 'Successfully created']]);
     }
 
@@ -59,7 +62,8 @@ class TagController extends Controller
 
     public function update(Request $request, Tag $tag)
     {
-        //
+
+        Cache::forget("tags");
     }
 
     public function destroy(Tag $tag)
@@ -69,6 +73,8 @@ class TagController extends Controller
         } catch (\Exception $exception) {
             return redirect(route('tag.show', $tag))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
         }
+
+        Cache::forget("tags");
 
         return redirect(route('tag.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
     }
