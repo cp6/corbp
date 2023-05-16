@@ -52,7 +52,7 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                                 Devices
                             </NavLink>
                             <NavLink href={route('lense.index')} active={route().current('lense.*')}>
-                                Lenses
+                                Lens
                             </NavLink>
                             <NavLink href={route('tag.index')} active={route().current('tag.*')}>
                                 Tags
@@ -192,7 +192,7 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                         Devices
                     </ResponsiveNavLink>
                     <ResponsiveNavLink href={route('lense.index')} active={route().current('lense.*')}>
-                        Lenses
+                        Lens
                     </ResponsiveNavLink>
                     <ResponsiveNavLink href={route('tag.index')} active={route().current('tag.*')}>
                         Tags

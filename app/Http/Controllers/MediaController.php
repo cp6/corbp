@@ -6,7 +6,7 @@ use App\Jobs\ProcessUpload;
 use App\Models\Device;
 use App\Models\Directory;
 use App\Models\Exif;
-use App\Models\Lense;
+use App\Models\Lens;
 use App\Models\Location;
 use App\Models\Media;
 use App\Models\SubLocation;
@@ -198,7 +198,7 @@ class MediaController extends Controller
                 }
 
                 if (isset($exif_data['UndefinedTag:0xA434'])) {
-                    $exif->lens_id = Lense::updateOrCreate(['name' => $exif_data['UndefinedTag:0xA434'], 'slug' => $exif_data['UndefinedTag:0xA434']])->value('id');
+                    $exif->lens_id = Lens::updateOrCreate(['name' => $exif_data['UndefinedTag:0xA434'], 'slug' => $exif_data['UndefinedTag:0xA434']])->value('id');
                 }
 
                 if (isset($exif_data['DateTimeOriginal'])) {

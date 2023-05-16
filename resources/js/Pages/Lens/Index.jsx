@@ -6,10 +6,10 @@ import Pagination from "@/Components/Pagination";
 export default function Index(props) {
     const auth = usePage().props.auth;
     return (
-        <MainLayout auth={auth} title={'Lenses'} header={'Lenses'}>
+        <MainLayout auth={auth} title={'Lens'} header={'Lens'}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 <div className="grid gap-2 grid-cols-2 sm:grid-cols-4 sm:gap-4">
-                    {props.lenses.data.map(lense =>
+                    {props.lens.data.map(lense =>
                         <a key={lense.id} href={route('lense.show', lense.slug)}>
                             <Card>
                                 <h1 className={'font-semibold text-gray-800 dark:text-white'}>{lense.name} <span
@@ -21,7 +21,7 @@ export default function Index(props) {
                     )}
                 </div>
                 <div className="grid grid-cols-2">
-                    <Pagination data={props.lenses}/>
+                    <Pagination data={props.lens}/>
                 </div>
             </div>
         </MainLayout>

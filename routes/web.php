@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LenseController;
+use App\Http\Controllers\LensController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
@@ -35,9 +35,9 @@ Route::get('/sub-locations/{subLocation:slug}', [SubLocationController::class, '
 Route::get('/devices', [DeviceController::class, 'index'])->name('device.index');
 Route::get('/devices/{device:slug}', [DeviceController::class, 'show'])->name('device.show');
 
-//Lenses
-Route::get('/lenses', [LenseController::class, 'index'])->name('lense.index');
-Route::get('/lenses/{lense:slug}', [LenseController::class, 'show'])->name('lense.show');
+//Lens
+Route::get('/lens', [LensController::class, 'index'])->name('lens.index');
+Route::get('/lens/{lens:slug}', [LensController::class, 'show'])->name('lens.show');
 
 //Tags
 Route::get('/tags', [TagController::class, 'index'])->name('tag.index');
@@ -73,10 +73,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/devices/{device}', [DeviceController::class, 'destroy'])->name('device.destroy');
 
     //Lens
-    Route::post('/lenses', [LenseController::class, 'store'])->name('lense.store');
-    Route::get('/lenses/{lense:slug}/edit', [LenseController::class, 'edit'])->name('lense.edit');
-    Route::patch('/lenses/{lense}', [LenseController::class, 'update'])->name('lense.update');
-    Route::delete('/lenses/{lense}', [LenseController::class, 'destroy'])->name('lense.destroy');
+    Route::post('/lens', [LensController::class, 'store'])->name('lens.store');
+    Route::get('/lens/{lens:slug}/edit', [LensController::class, 'edit'])->name('lens.edit');
+    Route::patch('/lens/{lens}', [LensController::class, 'update'])->name('lens.update');
+    Route::delete('/lens/{lens}', [LensController::class, 'destroy'])->name('lens.destroy');
 
     //Tags
     Route::post('/tags', [TagController::class, 'store'])->name('tag.store');

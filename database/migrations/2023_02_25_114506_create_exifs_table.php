@@ -31,7 +31,7 @@ return new class extends Migration
 
             $table->foreign('media_id')->references('id')->on('media')->onDelete('cascade');
             $table->foreign('device_id')->references('id')->on('devices')->onDelete('set null');
-            $table->foreign('lens_id')->references('id')->on('lenses')->onDelete('set null');
+            $table->foreign('lens_id')->references('id')->on('lens')->onDelete('set null');
         });
     }
 

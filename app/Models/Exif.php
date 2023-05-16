@@ -20,7 +20,7 @@ class Exif extends Model
     }
     public function lens(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(Lense::class, 'id', 'lens_id');
+        return $this->hasOne(Lens::class, 'id', 'lens_id');
     }
 
 }

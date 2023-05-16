@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lense;
+use App\Models\Lens;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class LenseController extends Controller
+class LensController extends Controller
 {
     public function index(): \Inertia\Response
     {
-        return Inertia::render('Lenses/Index', [
-            'lenses' => Lense::Paginate(2)
+        return Inertia::render('Lens/Index', [
+            'lens' => Lens::Paginate(6)
         ]);
     }
 
@@ -25,23 +25,23 @@ class LenseController extends Controller
         abort(404);
     }
 
-    public function show(Lense $lense): \Inertia\Response
+    public function show(Lens $lens): \Inertia\Response
     {
-        return Inertia::render('Lenses/Show', [
-            'lense' => $lense,
+        return Inertia::render('Lens/Show', [
+            'lens' => $lens,
             'response' => \Session::get('response')
         ]);
     }
 
-    public function edit(Lense $lense): \Inertia\Response
+    public function edit(Lens $lens): \Inertia\Response
     {
-        return Inertia::render('Lenses/Edit', [
-            'resource' => $lense,
+        return Inertia::render('Lens/Edit', [
+            'resource' => $lens,
             'response' => \Session::get('response')
         ]);
     }
 
-    public function update(Request $request, Lense $lense)
+    public function update(Request $request, Lens $lens)
     {
         $request->validate([
             'name' => 'string|required|max:125',
@@ -55,21 +55,21 @@ class LenseController extends Controller
             'max_aperture' => 'numeric|sometimes|nullable|max:999|min:1'
         ]);
 
-        $response = $lense->update($request->all());
+        $response = $lens->update($request->all());
 
         if ($response) {
-            return redirect(route('lense.edit', $lense))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
+            return redirect(route('lense.edit', $lens))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
         }
 
-        return redirect(route('lense.edit', $lense))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
+        return redirect(route('lense.edit', $lens))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
     }
 
-    public function destroy(Lense $lense)
+    public function destroy(Lens $lens)
     {
         try {
-            $lense->delete();
+            $lens->delete();
         } catch (\Exception $exception) {
-            return redirect(route('lense.show', $lense))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
+            return redirect(route('lense.show', $lens))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
         }
 
         return redirect(route('lense.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
