@@ -7,7 +7,6 @@ import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import ResponseText from "@/Components/ResponseText";
 import {slugify} from "@/Helpers";
-import CreateButton from "@/Components/CreateButton";
 import BackButton from "@/Components/BackButton";
 
 export default function Edit(props) {
