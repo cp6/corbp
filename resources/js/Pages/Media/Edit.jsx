@@ -8,6 +8,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import ResponseText from "@/Components/ResponseText";
 import {slugify} from "@/Helpers";
 import CreateButton from "@/Components/CreateButton";
+import BackButton from "@/Components/BackButton";
 
 export default function Edit(props) {
 
@@ -43,7 +44,7 @@ export default function Edit(props) {
                 {
                     (() => {
                         if (auth.user !== null) {
-                            return (<CreateButton text={'Back to media'} link={route('media.show', resource.id)}/>);
+                            return (<BackButton text={'Back to media'} link={route('media.show', resource.id)}/>);
                         }
                     })()
                 }

@@ -1,7 +1,7 @@
 import NavBar from "@/Components/NavBar";
 import {Head} from "@inertiajs/react";
 import ResponseAlert from "@/Components/ResponseAlert";
-import CreateButton from "@/Components/CreateButton";
+import EditButton from "@/Components/EditButton";
 
 export default function MainLayout({auth, title, header, children, response = null, media = false, media_id = null}) {
 
@@ -23,7 +23,7 @@ export default function MainLayout({auth, title, header, children, response = nu
                                         {
                                             (() => {
                                                 if (auth.user !== null) {
-                                                    return (<CreateButton text={'Edit media'} link={route('media.edit', media_id)}/>);
+                                                    return (<EditButton text={'Edit media'} link={route('media.edit', media_id)}/>);
                                                 }
                                             })()
                                         }
