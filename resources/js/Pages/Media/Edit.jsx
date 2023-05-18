@@ -40,13 +40,7 @@ export default function Edit(props) {
         <MainLayout auth={auth} title={'Edit media ' + resource.title_desc.title}
                     header={'Edit: ' + resource.title_desc.title}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
-                {
-                    (() => {
-                        if (auth.user !== null) {
-                            return (<BackButton text={'Back to media'} link={route('media.show', resource.id)}/>);
-                        }
-                    })()
-                }
+                <BackButton text={'Back to media'} link={route('media.show', resource.id)}/>
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
                         <div className={'grid grid-cols-1 md:grid-cols-6 md:gap-4 mb-2'}>
