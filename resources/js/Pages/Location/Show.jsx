@@ -13,13 +13,19 @@ export default function Show(props) {
                         }
                     })()
                 }
-                <div className="grid gap-2 grid-cols-12 sm:gap-4">
-                    {props.media.map(media =>
-                        <div key={media.id} className={'col-span-6 md:col-span-3'}>
-                            <a href={route('media.show', media.id)}><img src={asset(media.directory.name, media.id, media.extension, 'SMALL')} alt={media.title_desc.title + ' image'} title={'view ' + media.title_desc.title} className="rounded-md"/></a>
-                        </div>
-                    )}
-                </div>
+                    {
+                        (() => {
+                            if (props.media.length > 0) {
+                                return (<div className="grid gap-2 grid-cols-12 sm:gap-4">{props.media.map(media =>
+                                    <div key={media.id} className={'col-span-6 md:col-span-3'}>
+                                        <a href={route('media.show', media.id)}><img src={asset(media.directory.name, media.id, media.extension, 'SMALL')} alt={media.title_desc.title + ' image'} title={'view ' + media.title_desc.title} className="rounded-md"/></a>
+                                    </div>
+                                    )}</div>);
+                            } else {
+                                return (<p className={'text-gray-600 dark:text-gray-400'}>No images found for this location</p>);
+                            }
+                        })()
+                    }
             </div>
         </MainLayout>
     );
