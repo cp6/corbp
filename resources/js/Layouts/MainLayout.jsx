@@ -51,6 +51,7 @@ export default function MainLayout({auth, title, header, children, response = nu
                         <div className="max-w-7xl mx-auto px-1 sm:px-2 space-y-4">
                             {children}
                         </div>
+                        <p className={'text-center mt-10 text-sm text-gray-600 dark:text-gray-500 italic'}>corbpie {new Date().getFullYear()}</p>
                     </div>
                 </main>
 
