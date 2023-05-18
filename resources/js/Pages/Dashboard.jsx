@@ -2,6 +2,7 @@ import MainLayout from "@/Layouts/MainLayout";
 import {usePage} from "@inertiajs/react";
 import Card from "@/Components/Card";
 import {asset} from "@/Helpers";
+import LocationCard from "@/Components/LocationCard";
 
 export default function Dashboard(props) {
 
@@ -24,7 +25,15 @@ export default function Dashboard(props) {
                     <div className="grid gap-2 grid-cols-12 sm:gap-4">
                         {props.random.locations.map(location =>
                             <div key={location.id} className={'col-span-6 md:col-span-3 mt-2'}>
-                                <a href={route('locations.show', location.slug)} className={'text-gray-800 dark:text-gray-200'}><Card>{location.name}</Card></a>
+                                <a href={route('locations.show', location.slug)} className={'text-gray-800 dark:text-gray-200'}><LocationCard>{location.name}
+                                    {(() => {
+                                        if (location.random_image !== null) {
+                                            return (
+                                                <img src={asset(location.random_image.directory.name, location.random_image.id, location.random_image.extension, 'SMALL')} alt={'Image for ' + location.name} title={'View images for ' + location.name} className="rounded-b-md mt-2 object-cover"/>
+                                            )
+                                        }
+                                    })()}
+                                </LocationCard></a>
                             </div>
                         )}
                     </div>
