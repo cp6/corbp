@@ -13,10 +13,16 @@ class Location extends Model
 
     protected $fillable = ['slug', 'dir', 'name', 'area', 'state', 'state_short', 'country', 'country_code', 'postcode', 'lat', 'lon', 'media_count'];
 
+    protected $with = ['random_image'];
 
     public function media(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Media::class, 'location_id', 'id');
+        return $this->hasMany(Media::class, 'location_id', 'id')->without(['location', 'sub_location', 'exif']);
+    }
+
+    public function random_image(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Media::class, 'location_id', 'id')->without(['location', 'sub_location', 'exif'])->inRandomOrder();
     }
 
     public function sub_locations(): \Illuminate\Database\Eloquent\Relations\HasMany
