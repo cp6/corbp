@@ -7,6 +7,7 @@ import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import ResponseText from "@/Components/ResponseText";
 import {slugify} from "@/Helpers";
+import BackButton from "@/Components/BackButton";
 
 export default function Edit(props) {
 
@@ -34,6 +35,7 @@ export default function Edit(props) {
     return (
         <MainLayout auth={auth} title={'Edit lens ' + resource.name} header={'Edit lens: ' + resource.name}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
+                <BackButton text={'Back to lens'} link={route('lens.show', resource.slug)}/>
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
                         <div className={'grid grid-cols-1 md:grid-cols-6 md:gap-4 mb-2'}>
