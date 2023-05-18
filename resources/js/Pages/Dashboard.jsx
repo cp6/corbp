@@ -11,8 +11,8 @@ export default function Dashboard(props) {
         <MainLayout auth={auth} title={'Home'} header={'corbp'}>
             <div className={'grid md:grid-cols-12'}>
                 <div className={'col-span-12'}>
-                    <h1 className={'md:text-xl text-gray-900 dark:text-gray-100'}>{props.count} Images uploaded</h1>
-                    <h1 className={'text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4 mb-2'}>Most recent uploads</h1>
+                    <h1 className={'text-md md:text-lg text-gray-900 dark:text-gray-100'}>{props.count} Images uploaded</h1>
+                    <h1 className={'text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-3 mb-2'}>Most recent uploads</h1>
                     <div className="grid gap-2 grid-cols-12 sm:gap-4">
                         {props.latest.map(media =>
                             <div key={media.id} className={'col-span-6 md:col-span-3'}>
