@@ -1,5 +1,5 @@
 import MainLayout from "@/Layouts/MainLayout";
-import CreateButton from "@/Components/CreateButton";
+import EditButton from "@/Components/EditButton";
 
 export default function Show(props) {
     return (
@@ -8,7 +8,7 @@ export default function Show(props) {
                 {
                     (() => {
                         if (props.auth.user !== null) {
-                            return (<CreateButton text={'Edit lens'} link={route('lens.edit', props.lens.slug)}/>);
+                            return (<EditButton text={'Edit lens'} link={route('lens.edit', props.lens.slug)}/>);
                         }
                     })()
                 }
