@@ -5,3 +5,6 @@ This media is then displayed in a fast, highly informal and SEO focused layout.
 With a backend of PHP Laravel and frontend of React js with Tailwind CSS light and dark mode.
 
 ## NOTE This is a work in progress
+
+
+SSR will be in use for SEO + search engine Crawling benefits
