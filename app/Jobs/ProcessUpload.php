@@ -42,17 +42,17 @@ class ProcessUpload implements ShouldQueue
         Media::createSmallerImage($file, storage_path($upload_directory) . $media->id . '_THUMB.' . $extension, (int)(0.03 * $media->width), (int)(0.03 * $media->height));
         Media::createSmallerImage($file, storage_path($upload_directory) . $media->id . '_SMALL.' . $extension, (int)(0.09 * $media->width), (int)(0.09 * $media->height));
         Media::createSmallerImage($file, storage_path($upload_directory) . $media->id . '_MEDIUM.' . $extension, (int)(0.2 * $media->width), (int)(0.2 * $media->height));
-        Media::createSmallerImage($file, storage_path($upload_directory) . $media->id . '.' . $extension, (int)(0.26 * $media->width), (int)(0.26 * $media->height));
+        Media::createSmallerImage($file, storage_path($upload_directory) . $media->id . '.' . $extension, (int)(0.41 * $media->width), (int)(0.41 * $media->height));
 
         //Watermark large and medium version images only
-        Media::watermarkImage($file, storage_path($upload_directory) . $media->id . '.' . $extension, 200, 180, 'corbpie_watermark_large.png');
+        Media::watermarkImage(storage_path($upload_directory) . $media->id . '.' . $extension, storage_path($upload_directory) . $media->id . '.' . $extension, 200, 180, 'corbpie_watermark_large.png');
         Media::watermarkImage(Storage::disk('public')->get("{$directory}/{$media->id}_MEDIUM.{$extension}"), storage_path($upload_directory) . $media->id . '_MEDIUM.' . $extension, 80, 80, 'corbpie_watermark_medium.png');
 
         //Delete the original uploaded file
         Storage::disk('private')->delete("process/{$media->id}.{$extension}");
 
         $media->directory->increment('count');//Add 1 to directory media count
-        $media->location->increment('count');//Add 1 to location media count
+        $media->location->increment('media_count');//Add 1 to location media count
 
         $media->update(['processed' => 1, 'display' => 1]);//Mark media as processed and displayable
 
