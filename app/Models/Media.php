@@ -50,7 +50,6 @@ class Media extends Model
         return $this->hasMany(TagAssigned::class, 'media_id', 'id');
     }
 
-
     public static function amount()
     {
         return Cache::remember("amount", now()->addMinutes(2), function () {
@@ -60,15 +59,15 @@ class Media extends Model
 
     public static function latest(int $amount = 4)
     {
-        return Cache::remember("latest.{$amount}", now()->addMinutes(2), function () {
-            return self::where('processed', 1)->orderBy('created_at', 'desc')->get();
+        return Cache::remember("latest.{$amount}", now()->addMinutes(2), function () use ($amount) {
+            return self::where('processed', 1)->take($amount)->orderBy('created_at', 'desc')->get();
         });
     }
 
     public static function forLocation(Location $location): \Illuminate\Database\Eloquent\Collection
     {
         return Cache::remember("media.location.{$location->id}", now()->addMonths(3), function () use ($location) {
-            return self::without(['location', 'directory'])->where('location_id', $location->id)->orderBy('created_at', 'desc')->get();
+            return self::without(['location'])->where('location_id', $location->id)->orderBy('created_at', 'desc')->get();
         });
     }
 
@@ -76,6 +75,7 @@ class Media extends Model
     {
         $img = Image::make($image)->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
+            $constraint->upsize();
         });
 
         return $img->save($save_as, 96);
