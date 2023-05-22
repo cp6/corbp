@@ -34,20 +34,39 @@ export default function Show(props) {
                             <p className={'text-gray-700 dark:text-gray-300'}><HiCamera className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>{media.exif.device.name} with {media.exif.lens.name}</p>
                         </div>
                         <div className={'col-span-12 md:col-span-6 md:text-end'}>
-                            <p className={'text-gray-700 dark:text-gray-300 mr-2'}><HiCog className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>{media.exif.f_stop_raw} {media.exif.focal_length}mm {media.exif.shutter_speed_raw} ISO {media.exif.iso}</p>
+                                {(() => {
+                                    if (media.exif !== null) {
+                                        return (
+                                            <p className={'text-gray-700 dark:text-gray-300 mr-2'}>
+                                            <HiCog className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>{media.exif.f_stop_raw} {media.exif.focal_length}mm {media.exif.shutter_speed_raw} ISO {media.exif.iso}
+                                            </p>
+                                        )
+                                    }
+                                })()}
                         </div>
                         <div className={'col-span-12'}>
-                            <p className={'text-gray-700 dark:text-gray-300 ml-2'}><HiExclamationCircle className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>{media.title_desc.description}</p>
+                            {(() => {
+                                if (media.title_desc.description !== null) {
+                                    return (
+                                        <p className={'text-gray-700 dark:text-gray-300 ml-2'}><HiExclamationCircle className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>{media.title_desc.description}</p>
+                                    )
+                                }
+                            })()}
                         </div>
                         <div className={'col-span-12'}>
-                            <p className={'text-gray-700 dark:text-gray-300 ml-2'}><HiTag className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>
-                                <span
-                                    className={'text-gray-800 dark:text-gray-200 italic hover:text-gray-900 hover:dark:text-gray-100'}>
+                            {(() => {
+                                if (media.tags > 0) {
+                                    return (
+                                    <p className={'text-gray-700 dark:text-gray-300 ml-2'}><HiTag className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>
+                                        <span
+                                            className={'text-gray-800 dark:text-gray-200 italic hover:text-gray-900 hover:dark:text-gray-100'}>
                     {media.tags.map((tag, i) => <a key={tag.id}
-                                             href={route('tag.show', tag.tag.slug)}>{tag.tag.name}{i === tags_amount - 1 ? '.' : ', '}</a>
+                                                   href={route('tag.show', tag.tag.slug)}>{tag.tag.name}{i === tags_amount - 1 ? '.' : ', '}</a>
                     )}
                                 </span>
-                            </p>
+                                    </p>)
+                                }
+                            })()}
                         </div>
                     </div>
                 </ImageCard>
