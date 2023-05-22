@@ -194,7 +194,7 @@ class MediaController extends Controller
                 $exif->software = $exif_data['Software'] ?? null;
 
                 if (isset($exif_data['Model'])) {
-                    $exif->device_id = Device::updateOrCreate(['name' => $exif_data['Model'], 'slug' => $exif_data['Model']], ['brand' => $exif_data['Make']])->value('id');
+                    $exif->device_id = Device::updateOrCreate(['name' => $exif_data['Model']], ['brand' => $exif_data['Make'], 'slug' => \Str::slug($exif_data['Model'], '-')])->value('id');
                 }
 
                 if (isset($exif_data['UndefinedTag:0xA434'])) {
