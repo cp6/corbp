@@ -34,19 +34,20 @@ class ProcessUpload implements ShouldQueue
         $directory = $media->directory->name;
         $upload_directory = "app/public/{$directory}/";
         $extension = $media->extension;
+        $storage_path = storage_path($upload_directory);
 
         if (!Storage::disk('public')->exists($directory)) {
             Storage::disk('public')->makeDirectory($directory);
         }
 
-        Media::createSmallerImage($file, storage_path($upload_directory) . $media->id . '_THUMB.' . $extension, (int)(0.03 * $media->width), (int)(0.03 * $media->height));
-        Media::createSmallerImage($file, storage_path($upload_directory) . $media->id . '_SMALL.' . $extension, (int)(0.09 * $media->width), (int)(0.09 * $media->height));
-        Media::createSmallerImage($file, storage_path($upload_directory) . $media->id . '_MEDIUM.' . $extension, (int)(0.2 * $media->width), (int)(0.2 * $media->height));
-        Media::createSmallerImage($file, storage_path($upload_directory) . $media->id . '.' . $extension, (int)(0.41 * $media->width), (int)(0.41 * $media->height));
+        Media::createSmallerImage($file, $storage_path . $media->id . '_THUMB.' . $extension, (0.03 * $media->width), (0.03 * $media->height));
+        Media::createSmallerImage($file, $storage_path . $media->id . '_SMALL.' . $extension, (0.09 * $media->width), (0.09 * $media->height));
+        Media::createSmallerImage($file, $storage_path . $media->id . '_MEDIUM.' . $extension, (0.2 * $media->width), (0.2 * $media->height));
+        Media::createSmallerImage($file, $storage_path . $media->id . '.' . $extension, (0.41 * $media->width), (0.41 * $media->height));
 
         //Watermark large and medium version images only
-        Media::watermarkImage(storage_path($upload_directory) . $media->id . '.' . $extension, storage_path($upload_directory) . $media->id . '.' . $extension, 200, 180, 'corbpie_watermark_large.png');
-        Media::watermarkImage(Storage::disk('public')->get("{$directory}/{$media->id}_MEDIUM.{$extension}"), storage_path($upload_directory) . $media->id . '_MEDIUM.' . $extension, 80, 80, 'corbpie_watermark_medium.png');
+        Media::watermarkImage($storage_path . $media->id . '.' . $extension, $storage_path . $media->id . '.' . $extension, 200, 180, 'corbpie_watermark_large.png');
+        Media::watermarkImage(Storage::disk('public')->get("{$directory}/{$media->id}_MEDIUM.{$extension}"), $storage_path . $media->id . '_MEDIUM.' . $extension, 80, 80, 'corbpie_watermark_medium.png');
 
         //Delete the original uploaded file
         Storage::disk('private')->delete("process/{$media->id}.{$extension}");
