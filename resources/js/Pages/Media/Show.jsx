@@ -1,17 +1,17 @@
 import MainLayout from "@/Layouts/MainLayout";
 import ImageCard from "@/Components/ImageCard";
-import {format} from "date-fns";
-import {HiCalendar, HiCamera, HiCog, HiExclamationCircle, HiGlobe} from "react-icons/hi";
 import {asset} from "@/Helpers";
-import SimilarImagesLoop from "@/Components/SimilarImagesLoop";
+import ExifLine from "@/Components/ExifLine";
+import DescLine from "@/Components/DescLine";
+import DeviceLine from "@/Components/DeviceLine";
+import DateLine from "@/Components/DateLine";
+import LocationLine from "@/Components/LocationLine";
 import TagsLoop from "@/Components/TagsLoop";
+import SimilarImagesLoop from "@/Components/SimilarImagesLoop";
 
 export default function Show(props) {
 
     const media = props.media;
-
-    const location_text = (media.location !== null) ? <a href={route('locations.show', media.location.slug)}>{media.location.name}</a> : '';
-    const sub_location_text = (media.sub_location !== null) ? <a href={route('locations.show', media.sub_location_id)}>{media.sub_location.name}</a> : '';
 
     return (
         <MainLayout auth={props.auth} title={media.title_desc.title} header={media.title_desc.title} media={true} media_id={media.id}>
@@ -23,43 +23,25 @@ export default function Show(props) {
                                                            title={media.title_desc.title} alt={media.title_desc.title}/></a>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-start ml-2'}>
-                            <p className={'text-gray-700 dark:text-gray-300'}><HiGlobe className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>{location_text} {sub_location_text}</p>
+                            <LocationLine data={media}/>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-center'}>
                             <p className={'text-gray-700 dark:text-gray-300'}></p>
                         </div>
                         <div className={'col-span-12 md:col-span-4 md:text-end'}>
-                            <p className={'text-gray-700 dark:text-gray-300 mr-2'}><HiCalendar className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>{format(new Date(media.exif.captured_at), 'do LLLL yyyy hh:mm:ss a ')}</p>
+                            <DateLine date={media.exif.captured_at}/>
                         </div>
                         <div className={'col-span-12 md:col-span-6 text-start ml-2'}>
-                            <p className={'text-gray-700 dark:text-gray-300'}><HiCamera className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>{media.exif.device.name} with {media.exif.lens.name}</p>
+                            <DeviceLine device={media.exif} />
                         </div>
                         <div className={'col-span-12 md:col-span-6 md:text-end'}>
-                                {(() => {
-                                    if (media.exif !== null) {
-                                        return (
-                                            <p className={'text-gray-700 dark:text-gray-300 mr-2'}>
-                                            <HiCog className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>{media.exif.f_stop_raw} {media.exif.focal_length}mm {media.exif.shutter_speed_raw} ISO {media.exif.iso}
-                                            </p>
-                                        )
-                                    }
-                                })()}
+                            <ExifLine exif={media.exif}/>
                         </div>
                         <div className={'col-span-12'}>
-                            {(() => {
-                                if (media.title_desc.description !== null) {
-                                    return (
-                                        <p className={'text-gray-700 dark:text-gray-300 ml-2'}><HiExclamationCircle className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>{media.title_desc.description}</p>
-                                    )
-                                }
-                            })()}
+                            <DescLine desc={media.title_desc.description}/>
                         </div>
                         <div className={'col-span-12'}>
-                            {(() => {
-                                if (media.tags.length > 0) {
-                                  return (<TagsLoop tags={media.tags}/>)
-                                }
-                            })()}
+                            <TagsLoop tags={media.tags}/>
                         </div>
                     </div>
                 </ImageCard>
