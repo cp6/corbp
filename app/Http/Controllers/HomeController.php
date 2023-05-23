@@ -18,7 +18,7 @@ class HomeController extends Controller
             'latest' => Media::latest(),
             'random' => [
                 'locations' => Location::randoms(4),
-                'tags' => Tag::randoms(4),
+                'tags' => Tag::randoms(8),
                 'devices' => Device::randoms(4)
             ]
         ]);
