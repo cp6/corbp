@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\TagAssigned;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
@@ -49,7 +50,8 @@ class TagController extends Controller
     public function show(Tag $tag): \Inertia\Response
     {
         return Inertia::render('Tag/Show', [
-            'resource' => $tag
+            'resource' => $tag,
+            'media' => TagAssigned::where('tag_id', $tag->id)->with('media')->get()
         ]);
     }
 

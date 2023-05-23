@@ -22,7 +22,7 @@ class TagAssigned extends Model
 
     public function media(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Media::class, 'id', 'media_id');
+        return $this->belongsTo(Media::class, 'media_id', 'id');
     }
 
 }
