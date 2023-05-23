@@ -1,13 +1,14 @@
 import MainLayout from "@/Layouts/MainLayout";
 import ImageCard from "@/Components/ImageCard";
 import {format} from "date-fns";
-import {HiCalendar, HiCamera, HiCog, HiExclamationCircle, HiGlobe, HiTag} from "react-icons/hi";
+import {HiCalendar, HiCamera, HiCog, HiExclamationCircle, HiGlobe} from "react-icons/hi";
 import {asset} from "@/Helpers";
+import SimilarImagesLoop from "@/Components/SimilarImagesLoop";
+import TagsLoop from "@/Components/TagsLoop";
 
 export default function Show(props) {
 
     const media = props.media;
-    const tags_amount = media.tags.length;
 
     const location_text = (media.location !== null) ? <a href={route('locations.show', media.location.slug)}>{media.location.name}</a> : '';
     const sub_location_text = (media.sub_location !== null) ? <a href={route('locations.show', media.sub_location_id)}>{media.sub_location.name}</a> : '';
@@ -55,21 +56,21 @@ export default function Show(props) {
                         </div>
                         <div className={'col-span-12'}>
                             {(() => {
-                                if (media.tags > 0) {
-                                    return (
-                                    <p className={'text-gray-700 dark:text-gray-300 ml-2'}><HiTag className={'h-5 w-5 mr-1 mb-1 inline text-gray-400'}/>
-                                        <span
-                                            className={'text-gray-800 dark:text-gray-200 italic hover:text-gray-900 hover:dark:text-gray-100'}>
-                    {media.tags.map((tag, i) => <a key={tag.id}
-                                                   href={route('tag.show', tag.tag.slug)}>{tag.tag.name}{i === tags_amount - 1 ? '.' : ', '}</a>
-                    )}
-                                </span>
-                                    </p>)
+                                if (media.tags.length > 0) {
+                                  return (<TagsLoop tags={media.tags}/>)
                                 }
                             })()}
                         </div>
                     </div>
                 </ImageCard>
+                {(() => {
+                    if (props.similar.length > 0) {
+                        return (<div>
+                            <h3 className={'font-semibold text-lg md:text-xl text-gray-800 dark:text-gray-100 tracking-wide mb-2'}>Similar images</h3>
+                                <SimilarImagesLoop current_id={props.media.id} similar={props.similar} />
+                        </div>)
+                    }
+                })()}
             </div>
         </MainLayout>
     );
