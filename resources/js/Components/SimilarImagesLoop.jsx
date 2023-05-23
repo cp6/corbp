@@ -2,10 +2,13 @@ import {asset} from "@/Helpers";
 
 export default function SimilarImagesLoop({current_id, similar}) {
     {
+        let loop_count = 0;
+
         return (
             <div className="grid gap-2 grid-cols-12 sm:gap-4">
                 {similar.map((media) => {
-                    if (media.id !== current_id) {
+                    if (loop_count <= 4 && media.id !== current_id) {
+                        loop_count++;
                         return (
                             <div key={media.id} className={'col-span-6 md:col-span-3'}>
                                 <a href={route('media.show', media.id)}><img
