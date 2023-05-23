@@ -46,11 +46,9 @@ export default function Dashboard(props) {
                         )}
                     </div>
                     <h1 className={'text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4'}>Random tags</h1>
-                    <div className="grid gap-2 grid-cols-12 sm:gap-4">
+                    <div className="">
                         {props.random.tags.map(tag =>
-                            <div key={tag.id} className={'col-span-6 md:col-span-3 mt-2'}>
-                                <a href={route('tag.show', tag.slug)} className={'text-gray-800 dark:text-gray-200'}><Card>{tag.name}</Card></a>
-                            </div>
+                            <p className={'inline mr-1'}><a key={tag.id} href={route('tag.show', tag.slug)} className={'text-gray-800 dark:text-gray-200 italic hover:text-gray-900 hover:dark:text-gray-100'}>{tag.name}</a> </p>
                         )}
                     </div>
                 </div>
