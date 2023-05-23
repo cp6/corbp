@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->decimal('lat', 10, 7)->nullable()->default(null);
             $table->decimal('lon', 10, 7)->nullable()->default(null);
             $table->integer('media_count')->default(0);
+            $table->char('featured_media', 8)->nullable()->default(null)->unique();
             $table->timestamps();
         });
     }
