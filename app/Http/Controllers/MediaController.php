@@ -51,7 +51,7 @@ class MediaController extends Controller
         $location_media_count = $location_media->count();
         return Inertia::render('Media/Show', [
             'media' => $media,
-            'similar' => $location_media->random(($location_media_count > 4) ? 4 : $location_media_count),
+            'similar' => $location_media->random(($location_media_count > 4) ? 5 : $location_media_count),
             'response' => \Session::get('response')
         ]);
     }
