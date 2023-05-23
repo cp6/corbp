@@ -11,7 +11,7 @@ class Location extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['slug', 'dir', 'name', 'area', 'state', 'state_short', 'country', 'country_code', 'postcode', 'lat', 'lon', 'media_count'];
+    protected $fillable = ['slug', 'dir', 'name', 'area', 'state', 'state_short', 'country', 'country_code', 'postcode', 'lat', 'lon', 'media_count', 'featured_media'];
 
     protected $with = ['random_image'];
 
