@@ -1,4 +1,4 @@
-import {HiExclamationCircle} from "react-icons/hi";
+import {HiExclamationCircle} from "react-icons/hi/index.js";
 
 export default function DescLine({desc}) {
     {

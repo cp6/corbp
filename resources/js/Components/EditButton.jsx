@@ -1,5 +1,5 @@
 import React from "react";
-import {HiPencil} from "react-icons/hi";
+import {HiPencil} from "react-icons/hi/index.js";
 
 export default function EditButton({link, text}) {
     return (

@@ -1,4 +1,4 @@
-import {HiCog} from "react-icons/hi";
+import {HiCog} from "react-icons/hi/index.js";
 
 export default function ExifLine({exif}) {
     {

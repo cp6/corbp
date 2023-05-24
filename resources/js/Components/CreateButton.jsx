@@ -1,5 +1,5 @@
 import React from "react";
-import {HiPlus} from "react-icons/hi";
+import {HiPlus} from "react-icons/hi/index.js";
 
 export default function CreateButton({link, text}) {
     return (

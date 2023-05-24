@@ -6,7 +6,7 @@ import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import {Transition} from "@headlessui/react";
-import {HiDownload} from "react-icons/hi";
+import {HiDownload} from "react-icons/hi/index.js";
 import ResponseText from "@/Components/ResponseText";
 
 export default function Edit(props) {

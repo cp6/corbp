@@ -1,4 +1,4 @@
-import {HiGlobe} from "react-icons/hi";
+import {HiGlobe} from "react-icons/hi/index.js";
 
 export default function LocationLine({data}) {
     {

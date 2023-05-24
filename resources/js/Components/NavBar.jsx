@@ -7,9 +7,9 @@ export default function NavBar({auth, type = 'submit', className = '', processin
 
     const user = auth;
 
-    const [isDarkTheme, setIsDarkTheme] = useState(document.documentElement.classList.contains('dark'));
-
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+
+    const [isDarkTheme, setIsDarkTheme] = useState((typeof document !== 'undefined') ? document.documentElement.classList.contains('dark') : true);
 
     function processThemeChange() {
         if (localStorage.getItem('color-theme')) {

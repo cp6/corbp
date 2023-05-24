@@ -1,4 +1,4 @@
-import {HiCalendar} from "react-icons/hi";
+import {HiCalendar} from "react-icons/hi/index.js";
 import {format} from "date-fns";
 
 export default function DateLine({date}) {

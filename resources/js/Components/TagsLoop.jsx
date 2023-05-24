@@ -1,4 +1,4 @@
-import {HiTag} from "react-icons/hi";
+import {HiTag} from "react-icons/hi/index.js";
 
 export default function TagsLoop({tags}) {
     {

@@ -1,4 +1,4 @@
-import {HiCamera} from "react-icons/hi";
+import {HiCamera} from "react-icons/hi/index.js";
 
 export default function DeviceLine({device}) {
     {

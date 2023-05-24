@@ -6,7 +6,7 @@ import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import {Transition} from "@headlessui/react";
-import {HiDownload} from "react-icons/hi";
+import {HiDownload} from "react-icons/hi/index.js";
 
 export default function Create(props) {
     const auth = usePage().props.auth;

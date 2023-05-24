@@ -1,5 +1,5 @@
 import React from "react";
-import {HiArrowLeft} from "react-icons/hi";
+import {HiArrowLeft} from "react-icons/hi/index.js";
 
 export default function BackButton({link, text}) {
     return (
