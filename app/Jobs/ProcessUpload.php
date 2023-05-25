@@ -58,6 +58,7 @@ class ProcessUpload implements ShouldQueue
         $media->update(['processed' => 1, 'display' => 1]);//Mark media as processed and displayable
 
         Cache::forget("media.location.{$media->location->id}");//Clear the media for location cache
+        Cache::forget("stats");//Clear stats cache
 
         Log::debug("ProcessUpload FINISHED: {$media->id}");
     }

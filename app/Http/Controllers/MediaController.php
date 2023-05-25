@@ -289,7 +289,7 @@ class MediaController extends Controller
     public static function statsPage(): \Inertia\Response
     {
         return Inertia::render('Stats', [
-            'stats' => []
+            'stats' => Media::stats()
         ]);
     }
 

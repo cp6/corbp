@@ -90,4 +90,19 @@ class Media extends Model
         return $img->save($save_as);
     }
 
+    public static function stats(): array
+    {
+        return Cache::remember("stats", now()->addWeeks(2), function () {
+            return [
+                'total' => self::where('processed', 1)->count(),
+                'total_size' => self::where('processed', 1)->sum('size'),
+                'first_upload' => self::where('processed', 1)->orderBy('created_at')->first()->value('created_at'),
+                'latest_upload' => self::where('processed', 1)->orderBy('created_at', 'desc')->first()->value('created_at'),
+                'oldest_image' => Exif::with('media')->orderBy('captured_at')->first()->value('captured_at'),
+                'newest_image' => Exif::with('media')->orderBy('captured_at', 'desc')->first()->value('captured_at')
+            ];
+        });
+    }
+
+
 }
