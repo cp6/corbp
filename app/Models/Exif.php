@@ -14,6 +14,11 @@ class Exif extends Model
 
     protected $with = ['device', 'lens'];
 
+    public function media(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'media_id', 'id');
+    }
+
     public function device(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Device::class, 'id', 'device_id');
