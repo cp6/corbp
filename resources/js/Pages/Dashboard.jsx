@@ -9,10 +9,9 @@ export default function Dashboard(props) {
     const auth = usePage().props.auth;
 
     return (
-        <MainLayout auth={auth} title={'Home'} header={'corbp'}>
+        <MainLayout auth={auth} title={'Home'} header={'Corbpie images'} subheader={props.count + ' Images uploaded'}>
             <div className={'grid md:grid-cols-12'}>
                 <div className={'col-span-12'}>
-                    <h1 className={'font-semibold text-md md:text-lg text-gray-900 dark:text-gray-100'}>{props.count} Images uploaded</h1>
                     <h1 className={'font-semibold text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-3 mb-2'}>Most recent uploads</h1>
                     <div className="grid gap-2 grid-cols-12 sm:gap-4">
                         {props.latest.map(media =>
