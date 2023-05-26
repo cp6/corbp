@@ -12,8 +12,8 @@ export default function Dashboard(props) {
         <MainLayout auth={auth} title={'Home'} header={'corbp'}>
             <div className={'grid md:grid-cols-12'}>
                 <div className={'col-span-12'}>
-                    <h1 className={'text-md md:text-lg text-gray-900 dark:text-gray-100'}>{props.count} Images uploaded</h1>
-                    <h1 className={'text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-3 mb-2'}>Most recent uploads</h1>
+                    <h1 className={'font-semibold text-md md:text-lg text-gray-900 dark:text-gray-100'}>{props.count} Images uploaded</h1>
+                    <h1 className={'font-semibold text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-3 mb-2'}>Most recent uploads</h1>
                     <div className="grid gap-2 grid-cols-12 sm:gap-4">
                         {props.latest.map(media =>
                             <div key={media.id} className={'col-span-6 md:col-span-3'}>
@@ -21,11 +21,11 @@ export default function Dashboard(props) {
                             </div>
                         )}
                     </div>
-                    <h1 className={'text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4'}>Random locations</h1>
+                    <h1 className={'font-semibold text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4'}>Random locations</h1>
                     <div className="grid gap-2 grid-cols-12 sm:gap-4">
                         {props.random.locations.map(location =>
                             <div key={location.id} className={'col-span-6 md:col-span-3 mt-2'}>
-                                <a href={route('locations.show', location.slug)} className={'text-gray-800 dark:text-gray-200'}><LocationCard>{location.name}
+                                <a href={route('locations.show', location.slug)} className={'text-gray-800 dark:text-gray-200 font-semibold tracking-wide'}><LocationCard>{location.name}
                                     {(() => {
                                         if (location.random_image !== null) {
                                             return (
@@ -37,7 +37,7 @@ export default function Dashboard(props) {
                             </div>
                         )}
                     </div>
-                    <h1 className={'text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4'}>Random devices</h1>
+                    <h1 className={'font-semibold text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4'}>Random devices</h1>
                     <div className="grid gap-2 grid-cols-12 sm:gap-4">
                         {props.random.devices.map(device =>
                             <div key={device.id} className={'col-span-6 md:col-span-3 mt-2'}>
@@ -45,7 +45,7 @@ export default function Dashboard(props) {
                             </div>
                         )}
                     </div>
-                    <h1 className={'text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4'}>Random tags</h1>
+                    <h1 className={'font-semibold text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4'}>Random tags</h1>
                     <div className="">
                         {props.random.tags.map(tag =>
                             <p key={tag.id} className={'inline mr-1'}><a href={route('tag.show', tag.slug)} className={'text-gray-800 dark:text-gray-200 italic hover:text-gray-900 hover:dark:text-gray-100'}>{tag.name}</a> </p>
