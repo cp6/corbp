@@ -121,7 +121,7 @@ class LocationController extends Controller
 
     public function geoApiCall(Request $request): \Illuminate\Http\JsonResponse
     {
-        if (!isset($request->location)) {
+        if (is_null($request->location)) {
             return response()->json(['message' => 'Please set the location parameter'], 400)->header('Content-Type', 'application/json');
         }
         return response()->json(Location::getGeoApiData($request->location))->header('Content-Type', 'application/json');
