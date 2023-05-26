@@ -33,7 +33,8 @@ class LocationController extends Controller
             'lat' => 'numeric|sometimes|nullable',
             'lon' => 'numeric|sometimes|nullable',
             'country' => 'string|sometimes|nullable|max:125',
-            'country_code' => 'string|sometimes|nullable|size:3'
+            'country_code' => 'string|sometimes|nullable|size:3',
+            'desc' => 'string|sometimes|nullable|max:255',
         ]);
 
         try {
@@ -49,6 +50,7 @@ class LocationController extends Controller
             $location->postcode = $request->postcode ?? null;
             $location->lat = $request->lat ?? null;
             $location->lon = $request->lon ?? null;
+            $location->desc = $request->desc ?? null;
             $location->save();
 
         } catch (\Exception $exception) {
@@ -89,7 +91,8 @@ class LocationController extends Controller
             'lat' => 'numeric|sometimes|nullable',
             'lon' => 'numeric|sometimes|nullable',
             'country' => 'string|sometimes|nullable|max:125',
-            'country_code' => 'string|sometimes|nullable|size:3'
+            'country_code' => 'string|sometimes|nullable|size:3',
+            'desc' => 'string|sometimes|nullable|max:255'
         ]);
 
         $response = $location->update($request->all());

@@ -22,7 +22,8 @@ export default function Edit(props) {
         lat: resource.lat || '',
         lon: resource.lon || '',
         country: resource.country || '',
-        country_code: resource.country_code || ''
+        country_code: resource.country_code || '',
+        desc: resource.desc || '',
     });
 
     const submit = (e) => {
@@ -139,7 +140,19 @@ export default function Edit(props) {
                                     onClick={callGeoApi}
                                     title={'Fetch GEO data from location name field'}/>
                             </div>
+                        </div>
 
+
+                        <div className={'grid grid-cols-1 md:grid-cols-6 md:gap-4'}>
+                            <div className={'col-span-1 md:col-span-6'}>
+                                <InputLabel htmlFor="desc" value="Location description"/>
+                                <TextInput
+                                    value={data.desc}
+                                    onChange={(e) => setData('desc', e.target.value)}
+                                    required
+                                />
+                                <InputError message={errors.desc}/>
+                            </div>
                         </div>
 
                         <div className="flex items-center gap-4">
