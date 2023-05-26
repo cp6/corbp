@@ -11,7 +11,7 @@ class Location extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['slug', 'dir', 'name', 'area', 'state', 'state_short', 'country', 'country_code', 'postcode', 'lat', 'lon', 'media_count', 'featured_media'];
+    protected $fillable = ['slug', 'dir', 'name', 'area', 'state', 'state_short', 'country', 'country_code', 'postcode', 'lat', 'lon', 'media_count', 'featured_media', 'desc'];
 
     protected $with = ['featured', 'random_image'];
 
@@ -24,7 +24,6 @@ class Location extends Model
     {
         return $this->hasOne(Media::class, 'id', 'featured_media')->without(['location', 'sub_location', 'exif']);
     }
-
 
     public function random_image(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
