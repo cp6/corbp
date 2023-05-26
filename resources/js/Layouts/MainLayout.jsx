@@ -3,7 +3,7 @@ import {Head} from "@inertiajs/react";
 import ResponseAlert from "@/Components/ResponseAlert";
 import EditButton from "@/Components/EditButton";
 
-export default function MainLayout({auth, title, header, children, response = null, media = false, media_id = null}) {
+export default function MainLayout({auth, title, header, subheader, children, response = null, media = false, media_id = null}) {
 
     return (
         <>
@@ -36,6 +36,7 @@ export default function MainLayout({auth, title, header, children, response = nu
                             <header className="bg-gray-200 dark:bg-slate-900">
                                 <div className="max-w-7xl mx-auto py-4 px-2"><h1
                                     className="font-semibold text-xl md:text-3xl text-gray-800 dark:text-gray-100 tracking-wide mb-2">{header}</h1>
+                                    {subheader !== null ? <h4 className={'text-md md:text-xl text-gray-600 dark:text-gray-400 tracking-wide'}>{subheader}</h4> : ""}
                                     {response !== null ? <ResponseAlert type={response.type}
                                                                         text={response.message}></ResponseAlert> : ""}
                                 </div>
