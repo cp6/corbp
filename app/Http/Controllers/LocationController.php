@@ -64,11 +64,11 @@ class LocationController extends Controller
 
     }
 
-    public function show(Location $location): \Inertia\Response
+    public function show(Location $location, Request $request): \Inertia\Response
     {
         return Inertia::render('Location/Show', [
             'location' => $location,
-            'media' => Media::forLocation($location),
+            'media' => Media::forLocation($location, $request->page ?? 1),
             'response' => \Session::get('response')
         ]);
     }
