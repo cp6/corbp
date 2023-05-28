@@ -64,10 +64,10 @@ class Media extends Model
         });
     }
 
-    public static function forLocation(Location $location): \Illuminate\Database\Eloquent\Collection
+    public static function forLocation(Location $location, int $current_page = 1)
     {
-        return Cache::remember("media.location.{$location->id}", now()->addMonths(3), function () use ($location) {
-            return self::without(['location'])->where('location_id', $location->id)->orderBy('created_at', 'desc')->get();
+        return Cache::remember("media.location.{$location->id}.{$current_page}", now()->addMonths(3), function () use ($location, $current_page) {
+            return self::without(['location'])->where('location_id', $location->id)->orderBy('created_at', 'desc')->paginate(8, ['*'], 'page', $current_page);
         });
     }
 
