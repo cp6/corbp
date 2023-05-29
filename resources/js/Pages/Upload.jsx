@@ -81,7 +81,7 @@ export default function Upload() {
                                     onChange={(e) =>
                                         setData("files", e.target.files)
                                     }
-                                    className="block w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                    className="block w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-100 focus:outline-none dark:bg-slate-500 dark:placeholder-gray-100"
                                 />
                                 <span className="text-red-600">
                                 {errors.files}
