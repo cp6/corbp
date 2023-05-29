@@ -71,6 +71,13 @@ class Media extends Model
         });
     }
 
+    public static function forLocationNoPagination(Location $location)
+    {
+        return Cache::remember("media.location.{$location->id}", now()->addMonths(3), function () use ($location) {
+            return self::without(['location'])->where('location_id', $location->id)->orderBy('created_at', 'desc')->get();
+        });
+    }
+
     public static function createSmallerImage($image, string $save_as, int $width = 180, int $height = 140): \Intervention\Image\Image
     {
         $img = Image::make($image)->resize($width, $height, function ($constraint) {
