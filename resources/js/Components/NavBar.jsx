@@ -66,11 +66,11 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                             {
                                 (() => {
                                     if (user.user !== null) {
-                                        return (<>
+                                        return (
                                             <NavLink href={route('upload')} active={route().current('upload')}>
                                                 Upload
                                             </NavLink>
-                                        </>);
+                                        );
                                     }
                                 })()
                             }
@@ -97,12 +97,12 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                             {
                                 (() => {
                                     if (user.user === null) {
-                                        return (<>
+                                        return (
                                             <NavLink href={route('login')} active={route().current('login')}
                                                      className={'dark:text-blue-400'}>
                                                 Login
                                             </NavLink>
-                                        </>);
+                                        );
                                     }
                                 })()
                             }
@@ -111,8 +111,7 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                     {
                         (() => {
                             if (user.user !== null) {
-
-                                return (<>
+                                return (
                                     <div className="hidden sm:flex sm:items-center sm:ml-6">
                                         <div className="ml-3 relative">
                                             <Dropdown>
@@ -149,7 +148,7 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                                             </Dropdown>
                                         </div>
                                     </div>
-                                </>);
+                                );
                             }
                         })()
                     }
@@ -207,8 +206,7 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                 {
                     (() => {
                         if (user.user !== null) {
-
-                            return (<>
+                            return (
                                 <div className="pt-4 pb-1 border-t border-gray-200">
                                     <div className="px-4">
                                         <div className="font-medium text-base text-gray-800">
@@ -241,7 +239,7 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                                         </ResponsiveNavLink>
                                     </div>
                                 </div>
-                            </>);
+                            );
                         }
                     })()
                 }
