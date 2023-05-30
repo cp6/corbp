@@ -11,7 +11,7 @@ class DeviceController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render('Devices/Index', [
-            'devices' => Device::Paginate(2)
+            'devices' => Device::Paginate(8)
         ]);
     }
 

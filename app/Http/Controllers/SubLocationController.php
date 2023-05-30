@@ -11,7 +11,7 @@ class SubLocationController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render('SubLocation/Index', [
-            'sub_locations' => SubLocation::Paginate(2)
+            'sub_locations' => SubLocation::Paginate(8)
         ]);
     }
 
