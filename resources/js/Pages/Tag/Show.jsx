@@ -22,7 +22,7 @@ export default function Show(props) {
                         if (media.length > 0) {
                             return (<div className="grid gap-2 grid-cols-12 sm:gap-4">{media.map(med =>
                                 <div key={med.id} className={'col-span-6 md:col-span-3'}>
-                                    <a href={route('media.show', med.id)}><img
+                                    <a href={route('media.show', med.media.id)}><img
                                         src={asset(med.media.directory.name, med.media.id, med.media.extension, 'SMALL')}
                                         alt={med.media.title_desc.title + ' image'}
                                         title={'view ' + med.media.title_desc.title} className="rounded-md"/></a>
