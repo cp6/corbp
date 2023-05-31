@@ -8,7 +8,7 @@ export default function Show(props) {
 
     return (
         <MainLayout auth={props.auth} title={props.resource.name + ' tagged images'}
-                    header={props.resource.name + ' tagged images'}>
+                    header={props.resource.name} subheader={'Tagged images'}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 {
                     (() => {
