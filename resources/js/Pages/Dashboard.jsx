@@ -8,6 +8,8 @@ export default function Dashboard(props) {
 
     const auth = usePage().props.auth;
 
+    const tags_amount = props.random.tags.length;
+
     return (
         <MainLayout auth={auth} title={'Home'} header={'Corbpie images'} subheader={props.count + ' Images uploaded'}>
             <div className={'grid md:grid-cols-12'}>
@@ -46,8 +48,8 @@ export default function Dashboard(props) {
                     </div>
                     <h1 className={'font-semibold text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4'}>Random tags</h1>
                     <div className="">
-                        {props.random.tags.map(tag =>
-                            <p key={tag.id} className={'inline mr-1'}><a href={route('tag.show', tag.slug)} className={'text-gray-800 dark:text-gray-200 italic hover:text-gray-900 hover:dark:text-gray-100'}>{tag.name}</a> </p>
+                        {props.random.tags.map((tag, i) =>
+                            <p key={tag.id} className={'inline mr-1'}><a href={route('tag.show', tag.slug)} className={'text-gray-800 dark:text-gray-200 italic hover:text-gray-900 hover:dark:text-gray-100'}>{tag.name}{i === tags_amount - 1 ? '.' : ', '}</a> </p>
                         )}
                     </div>
                 </div>
