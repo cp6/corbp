@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
 
     //Tags
     Route::post('/tags', [TagController::class, 'store'])->name('tag.store');
-    Route::get('/tags/{tag:slug}/edit', [TagController::class, 'edit'])->name('tags.edit');
+    Route::get('/tags/{tag:slug}/edit', [TagController::class, 'edit'])->name('tag.edit');
     Route::patch('/tags/{tag}', [TagController::class, 'update'])->name('tag.update');
     Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tag.destroy');
 
