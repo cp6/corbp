@@ -8,6 +8,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import ResponseText from "@/Components/ResponseText";
 import {slugify} from "@/Helpers";
 import BackButton from "@/Components/BackButton";
+import {HiArrowLeft, HiArrowLongLeft} from "react-icons/all";
 
 export default function Edit(props) {
 
@@ -36,6 +37,10 @@ export default function Edit(props) {
         patch(route('media.update', resource.id));
     };
 
+    const titleToSlug = () => {
+        setData('slug', slugify(data.title));
+    };
+
     return (
         <MainLayout auth={auth} title={'Edit media ' + resource.title_desc.title}
                     header={'Edit: ' + resource.title_desc.title}>
@@ -43,8 +48,8 @@ export default function Edit(props) {
                 <BackButton text={'Back to media'} link={route('media.show', resource.id)}/>
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
-                        <div className={'grid grid-cols-1 md:grid-cols-6 md:gap-4 mb-2'}>
-                            <div className={'col-span-1 md:col-span-2'}>
+                        <div className={'grid grid-cols-1 md:grid-cols-8 md:gap-4 mb-2'}>
+                            <div className={'col-span-1 md:col-span-3'}>
                                 <InputLabel htmlFor="slug" value="Slug"/>
                                 <TextInput
                                     value={data.slug}
@@ -52,6 +57,13 @@ export default function Edit(props) {
                                     required={true}
                                 />
                                 <InputError message={errors.slug}/>
+                            </div>
+                            <div className={'col-span-1 md:col-span-1'}>
+                                <InputLabel value="Title to slug"/>
+                                <HiArrowLongLeft
+                                    className="h-6 w-6 mt-2 text-gray-600 dark:text-white inline hover:cursor-pointer"
+                                    onClick={titleToSlug}
+                                    title={'Convert title into slug'}/>
                             </div>
                             <div className={'col-span-1 md:col-span-4'}>
                                 <InputLabel htmlFor="title" value="Title"/>
@@ -61,7 +73,7 @@ export default function Edit(props) {
                                 />
                                 <InputError message={errors.title}/>
                             </div>
-                            <div className={'col-span-1 md:col-span-6'}>
+                            <div className={'col-span-1 md:col-span-8'}>
                                 <InputLabel htmlFor="description" value="Description"/>
                                 <TextInput
                                     value={data.description}
@@ -69,7 +81,7 @@ export default function Edit(props) {
                                 />
                                 <InputError message={errors.description}/>
                             </div>
-                            <div className={'col-span-1 md:col-span-6'}>
+                            <div className={'col-span-1 md:col-span-4'}>
                                 <InputLabel htmlFor="location_id" value="Location"/>
                                 <select onChange={(e) => setData('location_id', e.target.value)}
                                         name="location_id"
@@ -85,7 +97,7 @@ export default function Edit(props) {
                         </div>
                         <p className={'font-medium text-sm text-gray-700 dark:text-gray-300 mt-1 md:mt-0'}>Tags</p>
                         <div className={'grid grid-cols-1 md:grid-cols-12 md:gap-4 mb-2'}>
-                            <div className={'col-span-1 md:col-span-2'}>
+                            <div className={'col-span-1 md:col-span-2 mb-2'}>
                                 <select onChange={(e) => setData('tag1', e.target.value)}
                                         name="tag1"
                                         value={data.tag1}
@@ -97,7 +109,7 @@ export default function Edit(props) {
                                 </select>
                                 <InputError message={errors.tag1}/>
                             </div>
-                            <div className={'col-span-1 md:col-span-2'}>
+                            <div className={'col-span-1 md:col-span-2 mb-2'}>
                                 <select onChange={(e) => setData('tag2', e.target.value)}
                                         name="tag2"
                                         value={data.tag2}
@@ -109,7 +121,7 @@ export default function Edit(props) {
                                 </select>
                                 <InputError message={errors.tag2}/>
                             </div>
-                            <div className={'col-span-1 md:col-span-2'}>
+                            <div className={'col-span-1 md:col-span-2 mb-2'}>
                                 <select onChange={(e) => setData('tag3', e.target.value)}
                                         name="tag3"
                                         value={data.tag3}
@@ -121,7 +133,7 @@ export default function Edit(props) {
                                 </select>
                                 <InputError message={errors.tag3}/>
                             </div>
-                            <div className={'col-span-1 md:col-span-2'}>
+                            <div className={'col-span-1 md:col-span-2 mb-2'}>
                                 <select onChange={(e) => setData('tag4', e.target.value)}
                                         name="tag4"
                                         value={data.tag4}
@@ -133,7 +145,7 @@ export default function Edit(props) {
                                 </select>
                                 <InputError message={errors.tag4}/>
                             </div>
-                            <div className={'col-span-1 md:col-span-2'}>
+                            <div className={'col-span-1 md:col-span-2 mb-2'}>
                                 <select onChange={(e) => setData('tag5', e.target.value)}
                                         name="tag5"
                                         value={data.tag5}
@@ -145,7 +157,7 @@ export default function Edit(props) {
                                 </select>
                                 <InputError message={errors.tag5}/>
                             </div>
-                            <div className={'col-span-1 md:col-span-2'}>
+                            <div className={'col-span-1 md:col-span-2 mb-2'}>
                                 <select onChange={(e) => setData('tag6', e.target.value)}
                                         name="tag6"
                                         value={data.tag6}
