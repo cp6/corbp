@@ -22,7 +22,7 @@ export default function Show(props) {
                             <a href={asset(media.directory.name, media.id, media.extension)}><img className={'w-full rounded-md'} src={asset(media.directory.name, media.id, media.extension, 'MEDIUM')}
                                                            title={media.title_desc.title} alt={media.title_desc.title}/></a>
                         </div>
-                        <div className={'col-span-12 md:col-span-4 text-start ml-2'}>
+                        <div className={'col-span-12 md:col-span-4 text-start md:ml-2'}>
                             <LocationLine data={media}/>
                         </div>
                         <div className={'col-span-12 md:col-span-4 text-center'}>
@@ -31,7 +31,7 @@ export default function Show(props) {
                         <div className={'col-span-12 md:col-span-4 md:text-end'}>
                             <DateLine date={media.exif.captured_at}/>
                         </div>
-                        <div className={'col-span-12 md:col-span-6 text-start ml-2'}>
+                        <div className={'col-span-12 md:col-span-6 text-start md:ml-2'}>
                             <DeviceLine device={media.exif} />
                         </div>
                         <div className={'col-span-12 md:col-span-6 md:text-end'}>
