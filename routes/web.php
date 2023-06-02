@@ -16,6 +16,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/random', [MediaController::class, 'getRandom'])->name('random');
 
 //Media
+Route::get('/m', [MediaController::class, 'index'])->name('media.index');
 Route::get('/m/{media}', [MediaController::class, 'show'])->name('media.show');
 
 //Stats
