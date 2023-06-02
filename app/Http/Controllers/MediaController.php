@@ -23,7 +23,6 @@ class MediaController extends Controller
     public function index(Request $request): \Inertia\Response
     {
         return Inertia::render('Media/Index', [
-            'page' => $request->page ?? 1,
             'media' => Media::orderBy('created_at', 'desc')->paginate(8)
         ]);
     }
