@@ -57,6 +57,9 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                             <NavLink href={route('tag.index')} active={route().current('tag.*')}>
                                 Tags
                             </NavLink>
+                            <NavLink href={route('sub-location.index')} active={route().current('sub-location.*')}>
+                                Sub locations
+                            </NavLink>
                             <NavLink href={route('random')}>
                                 Random image
                             </NavLink>
@@ -195,6 +198,9 @@ export default function NavBar({auth, type = 'submit', className = '', processin
                     </ResponsiveNavLink>
                     <ResponsiveNavLink href={route('tag.index')} active={route().current('tag.*')}>
                         Tags
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('sub-location.index')} active={route().current('sub-location.*')}>
+                        Sub locations
                     </ResponsiveNavLink>
                     <ResponsiveNavLink href={route('random')}>
                         Random image
