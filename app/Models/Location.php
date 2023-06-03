@@ -13,7 +13,7 @@ class Location extends Model
 
     protected $fillable = ['slug', 'dir', 'name', 'area', 'state', 'state_short', 'country', 'country_code', 'postcode', 'lat', 'lon', 'media_count', 'featured_media', 'desc'];
 
-    protected $with = ['featured', 'random_image', 'sub_locations'];
+    protected $with = ['featured', 'random_image'];
 
     public function media(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
