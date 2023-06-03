@@ -42,7 +42,7 @@ class LocationController extends Controller
             $location = new Location();
             $location->dir = Str::random(8);
             $location->name = $request->name;
-            $location->slug = strtolower(trim(str_replace(" ", "-", preg_replace("/[^a-zA-Z ]+/", "", $request->name))));
+            $location->slug = strtolower(trim(str_replace(" ", "-", preg_replace('/[^a-zA-Z0-9-]/', '', $request->name))));
             $location->area = $request->area ?? null;
             $location->state = $request->state ?? null;
             $location->country = $request->country ?? null;

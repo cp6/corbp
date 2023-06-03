@@ -40,7 +40,7 @@ class SubLocationController extends Controller
             $location = new SubLocation();
             $location->location_id = $request->location_id;
             $location->name = $request->name;
-            $location->slug = strtolower(trim(str_replace(" ", "-", preg_replace("/[^a-zA-Z ]+/", "", $request->slug))));
+            $location->slug = strtolower(trim(str_replace(" ", "-", preg_replace('/[^a-zA-Z0-9-]/', '', $request->slug))));
             $location->lat = $request->lat ?? null;
             $location->lon = $request->lon ?? null;
             $location->save();
