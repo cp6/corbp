@@ -5,7 +5,6 @@ import Pagination from "@/Components/Pagination";
 
 export default function Show(props) {
 
-    console.log(props.media.data);
     return (
         <MainLayout auth={props.auth} title={props.location.name + ' images'} header={props.location.name} subheader={props.location.desc}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
