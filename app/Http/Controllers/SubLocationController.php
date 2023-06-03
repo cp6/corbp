@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\Media;
 use App\Models\SubLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -58,7 +59,8 @@ class SubLocationController extends Controller
     public function show(SubLocation $subLocation): \Inertia\Response
     {
         return Inertia::render('SubLocation/Show', [
-            'sub_locations' => $subLocation,
+            'sub_location' => $subLocation,
+            'media' => Media::forSubLocation($subLocation, $request->page ?? 1),
             'response' => \Session::get('response')
         ]);
     }
@@ -67,6 +69,7 @@ class SubLocationController extends Controller
     {
         return Inertia::render('SubLocation/Edit', [
             'resource' => $subLocation,
+            'locations' => Location::cached(),
             'response' => \Session::get('response')
         ]);
     }
@@ -74,12 +77,22 @@ class SubLocationController extends Controller
     public function update(Request $request, SubLocation $subLocation)
     {
         $request->validate([
+            'location_id' => 'integer|required',
             'name' => 'string|required|max:125',
             'slug' => 'string|required|max:64',
             'lat' => 'numeric|sometimes|nullable',
             'lon' => 'numeric|sometimes|nullable',
         ]);
 
+        $response = $subLocation->update($request->all());
+
+        if ($response) {
+            return redirect(route('sub-location.edit', $subLocation))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated']]);
+        }
+
+        Cache::forget("locations");
+
+        return redirect(route('sub-location.edit', $subLocation))->with(['response' => ['type' => 'failure', 'message' => 'Updating failed']]);
 
     }
 
@@ -88,9 +101,10 @@ class SubLocationController extends Controller
         try {
             $subLocation->delete();
         } catch (\Exception $exception) {
-            return redirect(route('sublocation.show', $subLocation))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
+            return redirect(route('sub-location.show', $subLocation))->with(['response' => ['type' => 'failure', 'message' => 'Failed to delete: ' . $exception->getMessage()]]);
         }
 
-        return redirect(route('sublocation.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
+        return redirect(route('sub-location.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully deleted']]);
     }
+
 }

@@ -71,6 +71,13 @@ class Media extends Model
         });
     }
 
+    public static function forSubLocation(SubLocation $subLocation, int $current_page = 1)
+    {
+        return Cache::remember("media.sublocation.{$subLocation->id}.{$current_page}", now()->addDay(1), function () use ($subLocation, $current_page) {
+            return self::without(['location'])->where('sub_location_id', $subLocation->id)->orderBy('created_at', 'desc')->paginate(8, ['*'], 'page', $current_page);
+        });
+    }
+
     public static function forLocationNoPagination(Location $location)
     {
         return Cache::remember("media.location.{$location->id}", now()->addMonths(3), function () use ($location) {
