@@ -1,3 +1,4 @@
+import React from "react";
 import MainLayout from "@/Layouts/MainLayout";
 import Card from "@/Components/Card";
 import {useForm} from "@inertiajs/react";
@@ -8,7 +9,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import ResponseText from "@/Components/ResponseText";
 import {slugify} from "@/Helpers";
 import BackButton from "@/Components/BackButton";
-import {HiArrowLeft, HiArrowLongLeft} from "react-icons/all";
+import {HiArrowLongLeft} from "react-icons/all";
 
 export default function Edit(props) {
 
@@ -19,9 +20,12 @@ export default function Edit(props) {
     const locations = props.locations;
     const tags = props.tags;
 
+    const [subLocations, setSubLocations] = React.useState([]);
+
     const {data, setData, patch, errors, processing, recentlySuccessful} = useForm({
         slug: resource.slug || '',
         location_id: resource.location_id || '',
+        sub_location_id: resource.sub_location_id || '',
         title: resource.title_desc.title || '',
         description: resource.title_desc.description || '',
         tag1: (typeof tags_assigned[0] !== 'undefined') ? tags_assigned[0].tag_id : '',
@@ -39,6 +43,18 @@ export default function Edit(props) {
 
     const titleToSlug = () => {
         setData('slug', slugify(data.title));
+    };
+
+    const fetchSubLocations = event => {
+        setData('location_id', event.target.value)
+
+        if (event.target.value !== '') {
+            axios.get(route('api.sub-location.index', event.target.value)).then(response => {
+                setSubLocations(response.data);
+            }).catch(err => {
+                console.log('Failed fetching sub locations for ' + event.target.value)
+            });
+        }
     };
 
     return (
@@ -83,7 +99,7 @@ export default function Edit(props) {
                             </div>
                             <div className={'col-span-1 md:col-span-4'}>
                                 <InputLabel htmlFor="location_id" value="Location"/>
-                                <select onChange={(e) => setData('location_id', e.target.value)}
+                                <select onChange={fetchSubLocations}
                                         name="location_id"
                                         value={data.location_id}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -93,6 +109,19 @@ export default function Edit(props) {
                                                                        value={location.id}>{location.name}</option>)}
                                 </select>
                                 <InputError message={errors.location_id}/>
+                            </div>
+                            <div className={'col-span-1 md:col-span-4'}>
+                                <InputLabel htmlFor="sub_location_id" value="Sub location"/>
+                                <select onChange={(e) => setData('sub_location_id', e.target.value)}
+                                        name="sub_location_id"
+                                        value={data.sub_location_id}
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                >
+                                    <option value=''>None</option>
+                                    {subLocations.map(sub_location => <option key={sub_location.id}
+                                                                              value={sub_location.id}>{sub_location.name}</option>)}
+                                </select>
+                                <InputError message={errors.sub_location_id}/>
                             </div>
                         </div>
                         <p className={'font-medium text-sm text-gray-700 dark:text-gray-300 mt-1 md:mt-0'}>Tags</p>

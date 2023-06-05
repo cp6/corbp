@@ -29,6 +29,7 @@ Route::get('/locations/{location:slug}', [LocationController::class, 'show'])->n
 
 //Sub locations
 Route::get('/sub-locations', [SubLocationController::class, 'index'])->name('sub-location.index');
+Route::get('/api/sub-locations/{location}', [SubLocationController::class, 'forLocationApi'])->name('api.sub-location.index');
 Route::get('/sub-locations/create', [SubLocationController::class, 'create'])->middleware(['auth'])->name('sub-location.create');
 Route::get('/sub-locations/{subLocation:slug}', [SubLocationController::class, 'show'])->name('sub-location.show');
 
