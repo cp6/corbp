@@ -18,11 +18,6 @@ class SubLocationController extends Controller
         ]);
     }
 
-    public function forLocationApi(Location $location)
-    {
-        return SubLocation::where('location_id', $location->id)->without(['location'])->get();
-    }
-
     public function create(): \Inertia\Response
     {
         return Inertia::render('SubLocation/Create', [

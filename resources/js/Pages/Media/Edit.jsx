@@ -49,7 +49,7 @@ export default function Edit(props) {
         setData('location_id', event.target.value)
 
         if (event.target.value !== '') {
-            axios.get(route('api.sub-location.index', event.target.value)).then(response => {
+            axios.get(route('api.sub-location.show', event.target.value)).then(response => {
                 setSubLocations(response.data);
             }).catch(err => {
                 console.log('Failed fetching sub locations for ' + event.target.value)
