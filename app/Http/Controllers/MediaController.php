@@ -69,7 +69,6 @@ class MediaController extends Controller
 
     public function update(Request $request, Media $media)
     {
-
         $request->validate([
             'slug' => 'string|required|max:64',
             'title' => 'string|sometimes|nullable|max:64',
@@ -107,7 +106,8 @@ class MediaController extends Controller
 
         $media_response = $media->update([
             'slug' => $request->slug,
-            'location_id' => $request->location_id
+            'location_id' => $request->location_id,
+            'sub_location_id' => $request->sub_location_id,
         ]);
 
         $title_desc_response = $media->titleDesc()->update([
