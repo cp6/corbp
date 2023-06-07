@@ -20,6 +20,9 @@ export default function Edit(props) {
     const locations = props.locations;
     const tags = props.tags;
 
+    const [baseSubLocationId, setSaseSubLocationId] = React.useState((resource.sub_location !== null) ? resource.sub_location.id : null);
+    const [baseSubLocationName, setSaseSubLocationName] = React.useState((resource.sub_location !== null) ? resource.sub_location.name : 'None');
+
     const [subLocations, setSubLocations] = React.useState([]);
 
     const {data, setData, patch, errors, processing, recentlySuccessful} = useForm({
@@ -49,11 +52,19 @@ export default function Edit(props) {
         setData('location_id', event.target.value)
 
         if (event.target.value !== '') {
-            axios.get(route('api.sub-location.show', event.target.value)).then(response => {
-                setSubLocations(response.data);
-            }).catch(err => {
-                console.log('Failed fetching sub locations for ' + event.target.value)
-            });
+
+            fetch(route('api.sub-location.show', event.target.value), {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + auth.user.api_token
+                }
+            }).then(response => response.json())
+                .then(response => {
+                    setSubLocations(response);
+                });
+
         }
     };
 
@@ -117,7 +128,20 @@ export default function Edit(props) {
                                         value={data.sub_location_id}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 >
-                                    <option value=''>None</option>
+                                    {(() => {
+                                        if (baseSubLocationId === null) {
+                                            return (
+                                                <option value=''>None</option>
+                                            )
+                                        } else {
+                                            return (
+                                                <>
+                                                    <option value=''>None</option>
+                                                    <option value={baseSubLocationId}>{baseSubLocationName}</option>
+                                                </>
+                                            )
+                                        }
+                                    })()}
                                     {subLocations.map(sub_location => <option key={sub_location.id}
                                                                               value={sub_location.id}>{sub_location.name}</option>)}
                                 </select>
