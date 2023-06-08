@@ -51,7 +51,7 @@ class TagController extends Controller
     {
         return Inertia::render('Tag/Show', [
             'resource' => $tag,
-            'media' => TagAssigned::where('tag_id', $tag->id)->with('media')->get()
+            'media' => TagAssigned::where('tag_id', $tag->id)->with('media')->paginate(8)
         ]);
     }
 

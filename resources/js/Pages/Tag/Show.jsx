@@ -1,10 +1,11 @@
 import MainLayout from "@/Layouts/MainLayout";
 import {asset} from "@/Helpers";
 import EditButton from "@/Components/EditButton";
+import Pagination from "@/Components/Pagination";
 
 export default function Show(props) {
 
-    const media = props.media;
+    const media = props.media.data;
 
     return (
         <MainLayout auth={props.auth} title={props.resource.name + ' tagged images'}
@@ -33,6 +34,9 @@ export default function Show(props) {
                         }
                     })()
                 }
+                <div className="grid grid-cols-2">
+                    <Pagination data={props.media}/>
+                </div>
             </div>
         </MainLayout>
     );
