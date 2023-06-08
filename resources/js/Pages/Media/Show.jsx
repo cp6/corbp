@@ -8,6 +8,7 @@ import DateLine from "@/Components/DateLine";
 import LocationLine from "@/Components/LocationLine";
 import TagsLoop from "@/Components/TagsLoop";
 import SimilarImagesLoop from "@/Components/SimilarImagesLoop";
+import SizeLine from "@/Components/SizeLine";
 
 export default function Show(props) {
 
@@ -37,8 +38,11 @@ export default function Show(props) {
                         <div className={'col-span-12 md:col-span-6 md:text-end'}>
                             <ExifLine exif={media.exif}/>
                         </div>
-                        <div className={'col-span-12'}>
+                        <div className={'col-span-12 md:col-span-8 text-start'}>
                             <DescLine desc={media.title_desc.description}/>
+                        </div>
+                        <div className={'col-span-12 md:col-span-4 md:text-end'}>
+                            <SizeLine size={media}/>
                         </div>
                         <div className={'col-span-12'}>
                             <TagsLoop tags={media.tags}/>
