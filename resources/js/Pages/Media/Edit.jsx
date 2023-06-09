@@ -10,6 +10,7 @@ import ResponseText from "@/Components/ResponseText";
 import {slugify} from "@/Helpers";
 import BackButton from "@/Components/BackButton";
 import {HiArrowLongLeft} from "react-icons/all";
+import DeleteButton from "@/Components/DeleteButton";
 
 export default function Edit(props) {
 
@@ -73,6 +74,7 @@ export default function Edit(props) {
                     header={'Edit: ' + resource.title_desc.title}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 <BackButton text={'Back to media'} link={route('media.show', resource.id)}/>
+                <DeleteButton text={'Delete image'} link={route('media.show', resource.id)}/>
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
                         <div className={'grid grid-cols-1 md:grid-cols-8 md:gap-4 mb-2'}>
