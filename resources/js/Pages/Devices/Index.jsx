@@ -15,7 +15,7 @@ export default function Index(props) {
                                 <h1 className={'font-semibold text-gray-800 dark:text-white'}>{device.name} <span
                                     className={'font-light text-gray-500 dark:text-gray-400'}>{device.media_count}</span>
                                 </h1>
-                                <h3 className={'text-gray-700 dark:text-gray-300'}>{device.state}</h3>
+                                <h3 className={'text-gray-700 dark:text-gray-300'}>{device.brand}</h3>
                             </Card>
                         </a>
                     )}
