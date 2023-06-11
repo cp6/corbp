@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
     //Media
     Route::get('/m/{media}/edit', [MediaController::class, 'edit'])->name('media.edit');
     Route::patch('/m/{media}', [MediaController::class, 'update'])->name('media.update');
+    Route::delete('/m/{media}', [MediaController::class, 'destroy'])->name('media.destroy');
 
     //Locations
     Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');

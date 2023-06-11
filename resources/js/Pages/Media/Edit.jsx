@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import MainLayout from "@/Layouts/MainLayout";
 import Card from "@/Components/Card";
 import {useForm} from "@inertiajs/react";
@@ -11,6 +11,7 @@ import {slugify} from "@/Helpers";
 import BackButton from "@/Components/BackButton";
 import {HiArrowLongLeft} from "react-icons/all";
 import DeleteButton from "@/Components/DeleteButton";
+import ConfirmDeleteModal from "@/Components/ConfirmDeleteModal";
 
 export default function Edit(props) {
 
@@ -70,12 +71,36 @@ export default function Edit(props) {
         }
     };
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleDelete = () => {
+        setIsModalOpen(false);
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.getElementsByName('csrf-token')[0].getAttribute('content')
+            }
+        };
+
+        fetch(route('media.destroy', resource.id), requestOptions).then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            }
+        });
+
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <MainLayout auth={auth} title={'Edit media ' + resource.title_desc.title}
                     header={'Edit: ' + resource.title_desc.title}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 <BackButton text={'Back to media'} link={route('media.show', resource.id)}/>
-                <DeleteButton text={'Delete image'} link={route('media.show', resource.id)}/>
+                <DeleteButton text={'Delete image'} onClick={() => setIsModalOpen(true)}/>
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
                         <div className={'grid grid-cols-1 md:grid-cols-12 md:gap-4 mb-2'}>
@@ -245,6 +270,11 @@ export default function Edit(props) {
                             <ResponseText recentlySuccessful={recentlySuccessful} response={response}></ResponseText>
                         </div>
                     </form>
+                    <ConfirmDeleteModal
+                        isOpen={isModalOpen}
+                        onCancel={handleCancel}
+                        onConfirm={handleDelete}
+                    />
                 </Card>
             </div>
         </MainLayout>
