@@ -27,6 +27,7 @@ export default function Edit(props) {
     const [subLocations, setSubLocations] = React.useState([]);
 
     const {data, setData, patch, errors, processing, recentlySuccessful} = useForm({
+        display: resource.display,
         slug: resource.slug || '',
         location_id: resource.location_id || '',
         sub_location_id: resource.sub_location_id || '',
@@ -77,6 +78,20 @@ export default function Edit(props) {
                 <DeleteButton text={'Delete image'} link={route('media.show', resource.id)}/>
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
+                        <div className={'grid grid-cols-1 md:grid-cols-12 md:gap-4 mb-2'}>
+                            <div className={'col-span-1 md:col-span-2'}>
+                                <InputLabel value="Display image"/>
+                                <select onChange={(e) => setData('display', e.target.value)}
+                                        name="display"
+                                        value={data.display}
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                >
+                                    <option value='0'>No</option>
+                                    <option value='1'>Yes</option>
+                                </select>
+                                <InputError message={errors.display}/>
+                            </div>
+                        </div>
                         <div className={'grid grid-cols-1 md:grid-cols-8 md:gap-4 mb-2'}>
                             <div className={'col-span-1 md:col-span-3'}>
                                 <InputLabel htmlFor="slug" value="Slug"/>
