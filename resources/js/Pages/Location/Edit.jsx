@@ -5,9 +5,12 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
-import {Transition} from "@headlessui/react";
 import {HiDownload} from "react-icons/hi/index.js";
 import ResponseText from "@/Components/ResponseText";
+import BackButton from "@/Components/BackButton";
+import DeleteButton from "@/Components/DeleteButton";
+import {useState} from "react";
+import ConfirmDeleteModal from "@/Components/ConfirmDeleteModal";
 
 export default function Edit(props) {
     const auth = usePage().props.auth;
@@ -54,9 +57,35 @@ export default function Edit(props) {
             });
     };
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleDelete = () => {
+        setIsModalOpen(false);
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.getElementsByName('csrf-token')[0].getAttribute('content')
+            }
+        };
+
+        fetch(route('locations.destroy', resource.id), requestOptions).then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            }
+        });
+
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <MainLayout auth={auth} title={'Edit location ' + resource.name} header={'Edit location: ' + resource.name}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
+                <BackButton text={'Back to location'} link={route('locations.show', resource.slug)}/>
+                <DeleteButton text={'Delete location'} onClick={() => setIsModalOpen(true)}/>
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
                         <div className={'grid grid-cols-1 md:grid-cols-6 md:gap-4 mb-2'}>
@@ -161,6 +190,12 @@ export default function Edit(props) {
                         </div>
 
                     </form>
+                    <ConfirmDeleteModal
+                        isOpen={isModalOpen}
+                        onCancel={handleCancel}
+                        onConfirm={handleDelete}
+                        itemType={'location'}
+                    />
                 </Card>
             </div>
         </MainLayout>
