@@ -274,6 +274,7 @@ export default function Edit(props) {
                         isOpen={isModalOpen}
                         onCancel={handleCancel}
                         onConfirm={handleDelete}
+                        itemType={'image'}
                     />
                 </Card>
             </div>
