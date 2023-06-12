@@ -5,10 +5,12 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
-import {Transition} from "@headlessui/react";
-import {HiDownload} from "react-icons/hi/index.js";
 import ResponseText from "@/Components/ResponseText";
 import {slugify} from "@/Helpers";
+import BackButton from "@/Components/BackButton";
+import DeleteButton from "@/Components/DeleteButton";
+import ConfirmDeleteModal from "@/Components/ConfirmDeleteModal";
+import {useState} from "react";
 
 export default function Edit(props) {
     const auth = usePage().props.auth;
@@ -33,15 +35,39 @@ export default function Edit(props) {
         setData(data => ({...data, name: name, slug: slugify(name)}));
     };
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleDelete = () => {
+        setIsModalOpen(false);
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.getElementsByName('csrf-token')[0].getAttribute('content')
+            }
+        };
+
+        fetch(route('sub-location.destroy', resource.id), requestOptions).then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            }
+        });
+
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <MainLayout auth={auth} title={'Edit sub location ' + resource.name} header={'Edit sub location: ' + resource.name} subheader={resource.location.name}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
+                <BackButton text={'Back to sub location'} link={route('sub-location.show', resource.slug)}/>
+                <DeleteButton text={'Delete sub location'} onClick={() => setIsModalOpen(true)}/>
                 <Card>
                     <form onSubmit={submit} className="mt-6 space-y-6">
                         <div className={'grid grid-cols-1 md:grid-cols-6 md:gap-4 mb-2'}>
-
                             <div className={'col-span-1 md:col-span-2 mt-1'}>
-
                                 <InputLabel htmlFor="location_id" value="Location"/>
                                 <select onChange={(e) => setData('location_id', e.target.value)}
                                         name="location_id"
@@ -101,6 +127,12 @@ export default function Edit(props) {
                         </div>
 
                     </form>
+                    <ConfirmDeleteModal
+                        isOpen={isModalOpen}
+                        onCancel={handleCancel}
+                        onConfirm={handleDelete}
+                        itemType={'sub location'}
+                    />
                 </Card>
             </div>
         </MainLayout>
