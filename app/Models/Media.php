@@ -85,6 +85,20 @@ class Media extends Model
         });
     }
 
+    public static function forDevice(Device $device, int $current_page = 1)
+    {
+        return Cache::remember("media.device.{$device->id}.{$current_page}", now()->addDay(1), function () use ($device, $current_page) {
+            return Exif::with(['media'])->without(['device'])->where('device_id', $device->id)->orderBy('created_at', 'desc')->paginate(8, ['*'], 'page', $current_page);
+        });
+    }
+
+    public static function forLens(Lens $lens, int $current_page = 1)
+    {
+        return Cache::remember("media.lens.{$lens->id}.{$current_page}", now()->addDay(1), function () use ($lens, $current_page) {
+            return Exif::with(['media'])->without(['device'])->where('lens_id', $lens->id)->orderBy('created_at', 'desc')->paginate(8, ['*'], 'page', $current_page);
+        });
+    }
+
     public static function createSmallerImage($image, string $save_as, int $width = 180, int $height = 140): \Intervention\Image\Image
     {
         $img = Image::make($image)->resize($width, $height, function ($constraint) {
