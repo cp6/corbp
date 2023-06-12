@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lens;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -25,10 +26,11 @@ class LensController extends Controller
         abort(404);
     }
 
-    public function show(Lens $lens): \Inertia\Response
+    public function show(Lens $lens, Request $request): \Inertia\Response
     {
         return Inertia::render('Lens/Show', [
             'lens' => $lens,
+            'media' => Media::forLens($lens, $request->page ?? 1),
             'response' => \Session::get('response')
         ]);
     }

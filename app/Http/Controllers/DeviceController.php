@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -25,10 +26,11 @@ class DeviceController extends Controller
         abort(404);
     }
 
-    public function show(Device $device): \Inertia\Response
+    public function show(Device $device, Request $request): \Inertia\Response
     {
         return Inertia::render('Devices/Show', [
             'device' => $device,
+            'media' => Media::forDevice($device, $request->page ?? 1),
             'response' => \Session::get('response'),
         ]);
     }
