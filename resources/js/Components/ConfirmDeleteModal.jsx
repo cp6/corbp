@@ -2,7 +2,7 @@ import React from 'react';
 
 const ConfirmDeleteModal = ({ isOpen, onCancel, onConfirm, itemType }) => {
     return (
-        <div className={`fixed inset-0 bottom-40 flex items-center justify-center ${isOpen ? '' : 'hidden'}`}>
+        <div className={`fixed inset-0 bottom-80 flex items-center justify-center ${isOpen ? '' : 'hidden'}`}>
             <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-xl">
                 <h2 className="text-xl font-bold tracking-wide mb-4 text-black dark:text-gray-100">Confirm Delete</h2>
                 <p className="mb-6 text-black dark:text-gray-100">Are you sure you want to delete this {itemType}?</p>
