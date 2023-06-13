@@ -1,10 +1,12 @@
-corbp is a self-made, self-hosted web application for archiving and displaying images with exif data from many locations taken by camera, drone and phone.
+corbp is a self-made, self-hosted web application for archiving and displaying images with their exif data from many
+locations taken by many devices such as camera, drone and phone.
 
-This media is then displayed in a fast, highly informal and SEO focused layout.
+These images are displayed in a fast, highly informal and SEO focused layout.
 
-With a backend of PHP Laravel and frontend of React js with Tailwind CSS light and dark mode.
+Built on a backend of PHP Laravel and frontend of React js with Tailwind CSS light and dark mode.
+
+SSR will be in use for SEO + search engine Crawling benefits.
+
+Image shrinking, compression and watermarking done through a queue system.
 
 ## NOTE This is a work in progress
-
-
-SSR will be in use for SEO + search engine Crawling benefits
