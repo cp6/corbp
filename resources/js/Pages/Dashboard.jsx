@@ -40,7 +40,7 @@ export default function Dashboard(props) {
                     <div className="grid gap-2 grid-cols-12 sm:gap-4">
                         {props.random.devices.map(device =>
                             <div key={device.id} className={'col-span-6 md:col-span-3 mt-2'}>
-                                <a href={route('device.show', device.slug)} className={'text-gray-800 dark:text-gray-200'}><Card>{device.name}</Card></a>
+                                <a href={route('device.show', device.slug)} className={'text-gray-800 dark:text-gray-200'}><Card><span className={'text-gray-600 dark:text-gray-400 text-sm'}>{device.brand}</span> {device.name}</Card></a>
                             </div>
                         )}
                     </div>
