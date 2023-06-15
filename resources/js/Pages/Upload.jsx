@@ -101,6 +101,11 @@ export default function Upload() {
                                                                        value={location.id}>{location.name}</option>)}
                                 </select>
                             </div>
+                            <div className={'col-span-6 md:col-span-3'}>
+                            </div>
+                            <div className={'col-span-6 md:col-span-3'}>
+                                <a className={'block font-medium text-sm text-blue-800 dark:text-blue-400'} href={route('locations.create')}>Create a location</a>
+                            </div>
                             <div className={'col-span-1 md:col-span-6'}>
                             <ProgressBar progress={uploadProgress} completed={uploadCompletedCount} toBeCompleted={uploadCount}></ProgressBar>
                             </div>
