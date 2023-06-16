@@ -14,11 +14,7 @@ export default function Index(props) {
         <MainLayout auth={auth} title={'Image tags'} header={'Image tags'}>
             <div className="max-w-7xl mx-auto sm:px-4 lg:px-2 space-y-6">
                 {
-                    (() => {
-                        if (props.auth.user !== null) {
-                            return (<CreateButton text={'Add a tag'} link={route('tag.create')}/>);
-                        }
-                    })()
+                    props.auth.user !== null ? <CreateButton text={'Add a tag'} link={route('tag.create')}/> : null
                 }
                 {
                     (() => {
