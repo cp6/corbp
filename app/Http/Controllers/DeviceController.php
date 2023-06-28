@@ -16,16 +16,6 @@ class DeviceController extends Controller
         ]);
     }
 
-    public function create(): void
-    {
-        abort(404);
-    }
-
-    public function store(Request $request): void
-    {
-        abort(404);
-    }
-
     public function show(Device $device, Request $request): \Inertia\Response
     {
         return Inertia::render('Devices/Show', [
