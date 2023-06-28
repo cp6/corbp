@@ -8,17 +8,8 @@ use Inertia\Inertia;
 
 class ExifController extends Controller
 {
-    public function index()
-    {
-        //
-    }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
+    public function store(Request $request): void
     {
         //
     }
@@ -37,13 +28,10 @@ class ExifController extends Controller
         ]);
     }
 
-    public function update(Request $request, Exif $exif)
+    public function update(Request $request, Exif $exif): void
     {
         //
     }
 
-    public function destroy(Exif $exif)
-    {
-        //
-    }
+
 }
