@@ -19,5 +19,4 @@ class TitleDescription extends Model
         return $this->belongsTo(Media::class, 'id', 'id');
     }
 
-
 }
