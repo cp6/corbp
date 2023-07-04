@@ -8,12 +8,6 @@ use Inertia\Inertia;
 
 class ExifController extends Controller
 {
-
-    public function store(Request $request): void
-    {
-        //
-    }
-
     public function show(Exif $exif): \Inertia\Response
     {
         return Inertia::render('Exif/Show', [
@@ -32,6 +26,5 @@ class ExifController extends Controller
     {
         //
     }
-
 
 }
