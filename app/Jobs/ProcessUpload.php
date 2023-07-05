@@ -22,7 +22,7 @@ class ProcessUpload implements ShouldQueue
     {
     }
 
-    public function handle(): void
+    public function handle(): Media
     {
         $media = $this->media;
 
@@ -61,6 +61,8 @@ class ProcessUpload implements ShouldQueue
         Cache::forget("stats");//Clear stats cache
 
         Log::debug("ProcessUpload FINISHED: {$media->id}");
+
+        return $media;
     }
 
 }
