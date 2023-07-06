@@ -104,10 +104,12 @@ export default function Upload() {
                             <div className={'col-span-6 md:col-span-3'}>
                             </div>
                             <div className={'col-span-6 md:col-span-3'}>
-                                <a className={'block font-medium text-sm text-blue-800 dark:text-blue-400'} href={route('locations.create')}>Create a location</a>
+                                <a className={'block font-medium text-sm text-blue-800 dark:text-blue-400'}
+                                   href={route('locations.create')}>Create a location</a>
                             </div>
                             <div className={'col-span-1 md:col-span-6'}>
-                            <ProgressBar progress={uploadProgress} completed={uploadCompletedCount} toBeCompleted={uploadCount}></ProgressBar>
+                                <ProgressBar progress={uploadProgress} completed={uploadCompletedCount}
+                                             toBeCompleted={uploadCount}></ProgressBar>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
@@ -122,12 +124,10 @@ export default function Upload() {
                                 <p className=
                                        {
                                            (() => {
-                                               if (response !== null) {
-                                                   if (response.type === 'success') {
-                                                       return ("text-sm text-green-500");
-                                                   } else {
-                                                       return ("text-sm text-red-500");
-                                                   }
+                                               if (response !== null && response.type === 'success') {
+                                                   return ("text-sm text-green-500");
+                                               } else {
+                                                   return ("text-sm text-red-500");
                                                }
                                            })()
                                        }
