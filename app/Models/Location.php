@@ -44,11 +44,17 @@ class Location extends Model
 
     public static function getGeoApiData(string $location)
     {
-        return Http::get('http://api.positionstack.com/v1/forward', [
+        $call = Http::get('http://api.positionstack.com/v1/forward', [
             'access_key' => env('GEO_POSTION_API_KEY'),
             'query' => $location,
             'country_module' => 1
-        ])->json();
+        ]);
+
+        if ($call->status() === 200) {
+            return $call->json();
+        }
+
+        return null;
     }
 
     public static function randoms(int $amount = 4)
