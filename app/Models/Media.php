@@ -49,16 +49,16 @@ class Media extends Model
         return $this->hasMany(TagAssigned::class, 'media_id', 'id');
     }
 
-    public static function amount()
+    public static function amount(): int
     {
-        return Cache::remember("amount", now()->addMinutes(2), function () {
+        return Cache::remember("amount", now()->addHours(2), function () {
             return self::count();
         });
     }
 
     public static function latest(int $amount = 4)
     {
-        return Cache::remember("latest.{$amount}", now()->addMinutes(2), function () use ($amount) {
+        return Cache::remember("latest.{$amount}", now()->addHours(2), function () use ($amount) {
             return self::where('processed', 1)->take($amount)->orderBy('created_at', 'desc')->get();
         });
     }
