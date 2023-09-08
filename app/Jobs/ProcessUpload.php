@@ -59,6 +59,8 @@ class ProcessUpload implements ShouldQueue
 
         Cache::forget("media.location.{$media->location->id}");//Clear the media for location cache
         Cache::forget("stats");//Clear stats cache
+        Cache::forget("amount");//Clear media amount
+        Cache::forget("latest.4");//Clear 4 most recent media
 
         Log::debug("ProcessUpload FINISHED: {$media->id}");
 
