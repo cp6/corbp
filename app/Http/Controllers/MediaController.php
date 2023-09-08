@@ -46,7 +46,6 @@ class MediaController extends Controller
 
     public function show(Media $media): \Inertia\Response
     {
-        //dd($media);
         $location_media = Media::forLocationNoPagination($media->location);
         $location_media_count = $location_media->count();
         return Inertia::render('Media/Show', [

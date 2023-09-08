@@ -6,7 +6,6 @@ use App\Models\Device;
 use App\Models\Location;
 use App\Models\Media;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class HomeController extends Controller
