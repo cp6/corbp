@@ -64,8 +64,22 @@ class TagController extends Controller
 
     public function update(Request $request, Tag $tag)
     {
+        $request->validate([
+            'name' => 'string|required|max:32',
+        ]);
+
+        try {
+
+            $tag->update(['name' => $request->name]);
+
+        } catch (\Exception $exception) {
+
+            return redirect(route('tag.edit', $tag->id))->with(['response' => ['type' => 'failure', 'message' => 'Could not be edited: ' . $exception->getMessage()]]);
+        }
 
         Cache::forget("tags");
+
+        return redirect(route('tag.index'))->with(['response' => ['type' => 'success', 'message' => 'Successfully updated tag']]);
     }
 
     public function destroy(Tag $tag)
