@@ -3,7 +3,7 @@
 corbp is a self-made, self-hosted web application for archiving and displaying images with their exif data from many
 locations taken by many devices such as camera, drone and phone.
 
-[![Generic badge](https://img.shields.io/badge/Laravel-10.1.5-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/PHP-8.2-purple.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/Tailwind-3.2.7-pink.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/Reacr-18.2-blue.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Laravel-10.1.5-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/PHP-8.2-purple.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/Tailwind-3.2.7-aqua.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/React-18.2-blue.svg)](https://shields.io/)
 
 
 These images are displayed in a fast, highly informal and SEO focused layout.
