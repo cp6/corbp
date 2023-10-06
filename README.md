@@ -19,4 +19,4 @@ Image shrinking, compression and watermarking done through a queue system.
 Requires PHP 8.2
 
 
-MySQL or SQLite
+MySQL or SQLite compatible for the database
